@@ -1218,6 +1218,11 @@ p {
   background-color: rgba(255, 237, 213, 0.5) !important;
 }
 
+/* Language switch wrapper - positioned to the right */
+.lang-switch-wrapper {
+  margin-left: auto;
+}
+
 /* Language switch button */
 .lang-switch-btn {
   display: flex;
