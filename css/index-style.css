@@ -944,12 +944,18 @@ p {
 /*===========================
 2.HEADER css 
 ===========================*/
+/* ===========================
+2.HEADER css (glassmorphism style)
+===========================*/
 .navigation {
-  -webkit-box-shadow: 0px 0px 29px 0px rgba(134, 134, 134, 0.25);
-  -moz-box-shadow: 0px 0px 29px 0px rgba(134, 134, 134, 0.25);
-  box-shadow: 0px 0px 29px 0px rgba(134, 134, 134, 0.25);
-  padding: 30px 0;
-  background-color: #f5f5f5;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(252, 220, 222, 0.3);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   -webkit-transition: all 0.3s ease-out 0s;
   -moz-transition: all 0.3s ease-out 0s;
   -ms-transition: all 0.3s ease-out 0s;
@@ -958,7 +964,6 @@ p {
 }
 
 .navigation.sticky {
-  padding: 20px 0;
   -webkit-transition: all 0.3s ease-out 0s;
   -moz-transition: all 0.3s ease-out 0s;
   -ms-transition: all 0.3s ease-out 0s;
@@ -969,34 +974,81 @@ p {
 .navigation .navbar {
   padding: 0;
   position: relative;
+  min-height: 64px;
 }
 
+/* Brand logo area */
 .navigation .navbar .navbar-brand {
   padding-top: 0;
-  padding-bottom: 5px;
+  padding-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
 }
 
+.nav-brand-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4f8bae, #92cdd6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+  -webkit-box-shadow: 0 2px 8px rgba(79, 139, 174, 0.3);
+  box-shadow: 0 2px 8px rgba(79, 139, 174, 0.3);
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover .nav-brand-icon {
+  -webkit-transform: rotate(15deg) scale(1.1);
+  transform: rotate(15deg) scale(1.1);
+}
+
+.nav-brand-text {
+  font-family: 'XiaolaiSC', monospace;
+  font-size: 20px;
+  font-weight: 900;
+  color: #333;
+  letter-spacing: 0.05em;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+
+.nav-brand-text .cn {
+  color: #ffb5b5;
+  font-weight: 700;
+}
+
+.navbar-brand:hover .nav-brand-text {
+  color: #4f8bae;
+}
+
+/* Hamburger toggler */
 .navigation .navbar .navbar-toggler {
-  margin-right: 20px;
-  padding: 2px 6px;
+  margin-right: 10px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 12px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
 
-@media (max-width: 330px){
-  .navigation .navbar .navbar-toggler {
-    margin-right: 0;
-  }
-  .navigation .navbar .navbar-brand {
-    width: calc(100% - 74px);
-  }
+.navigation .navbar .navbar-toggler:hover {
+  background-color: rgba(0, 0, 0, 0.04);
 }
 
 .navigation .navbar .navbar-toggler .toggler-icon {
-  width: 30px;
+  width: 22px;
   height: 2px;
-  background-color: #32333c;
-  margin: 5px 0;
+  background-color: #555;
+  margin: 4px 0;
   display: block;
   position: relative;
+  border-radius: 2px;
   -webkit-transition: all 0.3s ease-out 0s;
   -moz-transition: all 0.3s ease-out 0s;
   -ms-transition: all 0.3s ease-out 0s;
@@ -1010,7 +1062,7 @@ p {
   -ms-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
-  top: 7px;
+  top: 6px;
 }
 
 .navigation .navbar .navbar-toggler.active .toggler-icon:nth-of-type(2) {
@@ -1023,53 +1075,69 @@ p {
   -ms-transform: rotate(135deg);
   -o-transform: rotate(135deg);
   transform: rotate(135deg);
-  top: -7px;
+  top: -6px;
 }
 
+/* Desktop nav collapse */
+.navigation .navbar .navbar-collapse {
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+/* Mobile dropdown */
 @media only screen and (min-width: 768px) and (max-width: 891px) {
   .navigation .navbar .navbar-collapse {
       position: absolute;
-      top: 158%;
+      top: 100%;
       left: 0;
       width: 100%;
-      background-color: #f5f5f5;
+      background-color: rgba(255, 255, 255, 0.95);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
       z-index: 99;
-      -webkit-box-shadow: 0px 10px 15px 0px rgba(134, 134, 134, 0.15);
-      -moz-box-shadow: 0px 10px 15px 0px rgba(134, 134, 134, 0.15);
-      box-shadow: 0px 10px 15px 0px rgba(134, 134, 134, 0.15);
-      padding: 3px 12px;
+      -webkit-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      -moz-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      border-bottom: 1px solid rgba(252, 220, 222, 0.3);
+      padding: 8px 16px;
+      border-radius: 0 0 16px 16px;
   }
 }
 
 @media (max-width: 767px) {
   .navigation .navbar .navbar-collapse {
       position: absolute;
-      top: 158%;
+      top: 100%;
       left: 0;
       width: 100%;
-      background-color: #f5f5f5;
+      background-color: rgba(255, 255, 255, 0.95);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
       z-index: 99;
-      -webkit-box-shadow: 0px 10px 15px 0px rgba(134, 134, 134, 0.15);
-      -moz-box-shadow: 0px 10px 15px 0px rgba(134, 134, 134, 0.15);
-      box-shadow: 0px 10px 15px 0px rgba(134, 134, 134, 0.15);
-      padding: 3px 12px;
+      -webkit-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      -moz-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      border-bottom: 1px solid rgba(252, 220, 222, 0.3);
+      padding: 8px 16px;
+      border-radius: 0 0 16px 16px;
   }
 }
 
+/* Nav items */
 .navigation .navbar .navbar-nav .nav-item {
-  margin-left: 30px;
+  margin-left: 4px;
   word-break: break-all;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 891px) {
   .navigation .navbar .navbar-nav .nav-item {
-      margin: 4px 0;
+      margin: 2px 0;
   }
 }
 
 @media (max-width: 767px) {
   .navigation .navbar .navbar-nav .nav-item {
-      margin: 4px 0;
+      margin: 2px 0;
   }
 }
 
@@ -1078,36 +1146,45 @@ p {
 }
 
 .navigation .navbar .navbar-nav .nav-item a {
-  text-transform: uppercase;
-  font-size: 16px;
-  color: #8a8fa3;
-  font-weight: 500;
+  text-transform: none;
+  font-size: 14px;
+  color: #666;
+  font-weight: 600;
   position: relative;
-  -webkit-transition: all 0.3s ease-out 0s;
-  -moz-transition: all 0.3s ease-out 0s;
-  -ms-transition: all 0.3s ease-out 0s;
-  -o-transition: all 0.3s ease-out 0s;
-  transition: all 0.3s ease-out 0s;
+  padding: 8px 14px;
+  border-radius: 10px;
+  -webkit-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.navigation .navbar .navbar-nav .nav-item a::before {
-  position: absolute;
+/* Underline animation from test page */
+.navigation .navbar .navbar-nav .nav-item a::after {
   content: '';
-  width: 3px;
-  height: 0;
-  background-color: #4f8bae;
+  position: absolute;
+  bottom: 0;
   left: 50%;
-  top: -50px;
+  width: 0;
+  height: 2px;
+  background-color: #4f8bae;
+  -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
   transform: translateX(-50%);
-  -webkit-transition: all 0.3s ease-out 0s;
-  -moz-transition: all 0.3s ease-out 0s;
-  -ms-transition: all 0.3s ease-out 0s;
-  -o-transition: all 0.3s ease-out 0s;
-  transition: all 0.3s ease-out 0s;
+  border-radius: 99px;
+}
+
+.navigation .navbar .navbar-nav .nav-item a:hover::after {
+  width: 60%;
+}
+
+/* Remove old ::before indicator */
+.navigation .navbar .navbar-nav .nav-item a::before {
+  display: none;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 891px) {
@@ -1120,14 +1197,68 @@ p {
   .navigation .navbar .navbar-nav .nav-item a::before {
       display: none;
   }
+  .navigation .navbar .navbar-nav .nav-item a {
+      padding: 10px 14px;
+      border-radius: 12px;
+  }
 }
 
-.navigation .navbar .navbar-nav .nav-item.active a, .navigation .navbar .navbar-nav .nav-item:hover a {
+.navigation .navbar .navbar-nav .nav-item.active a, .navigation .navbar .navbar-nav .nav-item a:hover {
   color: #4f8bae;
+  background-color: rgba(230, 242, 247, 0.5);
 }
 
-.navigation .navbar .navbar-nav .nav-item.active a::before, .navigation .navbar .navbar-nav .nav-item:hover a::before {
-  height: 45px;
+/* 开往 special link */
+.nav-travellings a {
+  color: #f97316 !important;
+  font-weight: 700;
+}
+
+.nav-travellings a:hover {
+  background-color: rgba(255, 237, 213, 0.5) !important;
+}
+
+/* Language switch button */
+.lang-switch-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  border: 1px solid #fecdd3;
+  background: #fff;
+  color: #8a8fa3;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+}
+
+.lang-switch-btn:hover {
+  border-color: #4f8bae;
+  color: #4f8bae;
+  -webkit-box-shadow: 0 1px 4px rgba(79, 139, 174, 0.15);
+  box-shadow: 0 1px 4px rgba(79, 139, 174, 0.15);
+}
+
+.lang-switch-btn:active {
+  -webkit-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+.lang-switch-btn .fa-globe {
+  -webkit-animation: spin-slow 15s linear infinite;
+  animation: spin-slow 15s linear infinite;
+}
+
+@-webkit-keyframes spin-slow {
+  from { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .header-content {
@@ -1162,11 +1293,7 @@ p {
   --shadow: rgba(0, 0, 0, 0.08);
 }
 .header-content {
-  background: linear-gradient(135deg, 
-    hsl(340, 60%, 97%) 0%, 
-    hsl(270, 40%, 95%) 50%, 
-    hsl(150, 40%, 95%) 100%
-  );
+  background: url("https://img.eysnter.cn/file/Wallpaper/1780812502559_白洲梓.webp") center / cover no-repeat;
   padding: 80px 0;
   position: relative;
   overflow: hidden;
