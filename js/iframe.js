@@ -14,21 +14,7 @@ function loadScript(url_wrapper) {
     });
 }
 function loadHtml(){
-    document.getElementById("iframe").innerHTML = ` 
-    <div class="waifu" style="z-index:289;">
-        <!-- aplayer.z-index[290-299] -->
-        <div class="waifu-tips" lang="zh-CN"></div>
-        <canvas id="live2d" width="280" height="250" style="bottom: -10px;"></canvas>
-        <div class="waifu-tool">
-            <span class="fui-home"></span>
-            <span class="fui-chat"></span>
-            <span class="fui-eye"></span>
-            <span class="fui-user"></span>
-            <span class="fui-photo"></span>
-            <span class="fui-info-circle"></span>
-            <span class="fui-cross"></span>
-        </div>
-    </div>
+    document.getElementById("iframe").innerHTML = `
     <meting-js id="2608803683" server="tencent" type="playlist" fixed="true" autoplay loop order="random" preload="none" volume="0.2" mutex="true"></meting-js>
     `;
 }
@@ -43,18 +29,8 @@ $(window).on('load', function() {
         ["//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js", true],
         /* APlayer script */
         ["//iamyukino.cn/statics/as-includes/global/js/aplayer/APlayer.min.js", false],
-        ["//iamyukino.cn/statics/as-includes/global/js/aplayer/Meting.min.js", false],
-        /* Live2DCubismCore script */
-        ["//iamyukino.cn/statics/as-includes/global/waifu/Samples/TypeScript/Demo/live2d/assets/html2canvas.js", false],
-        ["//iamyukino.cn/statics/as-includes/global/waifu/Core/live2dcubismcore.js", false],
-        /* Build script */
-        ["//iamyukino.cn/statics/as-includes/global/waifu/Samples/TypeScript/Demo/dist/meidou_live2d.js", false],
-        ["//iamyukino.cn/statics/as-includes/global/waifu/Samples/TypeScript/Demo/live2d/assets/waifu-tips.js", false]
+        ["//iamyukino.cn/statics/as-includes/global/js/aplayer/Meting.min.js", false]
     ];
-    const modulesPath = "//iamyukino.cn/statics/as-content/global/waifu/"
-    const modelNames = ['TaoHua', 'mia1', 'Orangesweet2.1'] // 'live2d_free1.1' 'Hiyori'
-    const waifuTipsUrl = "//iamyukino.cn/statics/as-includes/global/waifu/Samples/TypeScript/Demo/live2d/assets/waifu-tips.json"
-
     var loadSequence = loadQueue.reduce(function(chain, script) {
         return chain.then(function() {
             return loadScript(script).catch(function(err) {
@@ -62,8 +38,5 @@ $(window).on('load', function() {
             });
         });
     }, Promise.resolve());
-    loadSequence.then(function() {
-        initModel(modulesPath, modelNames, waifuTipsUrl);
-    });
 });
 })();

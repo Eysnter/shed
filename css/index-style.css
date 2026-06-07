@@ -2510,7 +2510,7 @@ p.form-message.success.form-message.error, p.form-message.error.form-message.err
   background-color: #152136;
   opacity: 0.8;
   text-align: center;
-  z-index: 279; /* waifu.z-index[280-289] */
+  z-index: 279;
   -webkit-transition: all 0.3s ease-out 0s;
   -moz-transition: all 0.3s ease-out 0s;
   -ms-transition: all 0.3s ease-out 0s;
@@ -2539,7 +2539,7 @@ p.form-message.success.form-message.error, p.form-message.error.form-message.err
   background-color: #152136;
   opacity: 0.8;
   text-align: center;
-  z-index: 279; /* waifu.z-index[280-289] */
+  z-index: 279;
   -webkit-transition: all 0.3s ease-out 0s;
   -moz-transition: all 0.3s ease-out 0s;
   -ms-transition: all 0.3s ease-out 0s;
