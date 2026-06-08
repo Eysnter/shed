@@ -1,0 +1,53 @@
+<script setup>
+import { useScrollAnimation } from './composables/useScrollAnimation'
+import { useLanguageStore } from './stores/language'
+import { watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+import LoadingScreen from './components/LoadingScreen.vue'
+import Navbar from './components/Navbar.vue'
+import ParticleCanvas from './components/ParticleCanvas.vue'
+import BackToTop from './components/BackToTop.vue'
+import MusicPlayer from './components/MusicPlayer.vue'
+
+import HomeSection from './views/HomeSection.vue'
+import AboutSection from './views/AboutSection.vue'
+import AskSection from './views/AskSection.vue'
+import RecSection from './views/RecSection.vue'
+import BlogSection from './views/BlogSection.vue'
+import ApiSection from './views/ApiSection.vue'
+import ContactSection from './views/ContactSection.vue'
+import FooterSection from './views/FooterSection.vue'
+
+const { locale } = useI18n()
+const langStore = useLanguageStore()
+
+watch(() => langStore.current, (val) => {
+  locale.value = val
+  document.documentElement.lang = val === 'zh' ? 'zh-CN' : 'ja'
+})
+
+useScrollAnimation()
+</script>
+
+<template>
+  <div class="bg-dots min-h-screen relative">
+    <LoadingScreen />
+    <ParticleCanvas />
+    <Navbar />
+
+    <main>
+      <HomeSection />
+      <AboutSection />
+      <AskSection />
+      <RecSection />
+      <BlogSection />
+      <ApiSection />
+      <ContactSection />
+      <FooterSection />
+    </main>
+
+    <MusicPlayer />
+    <BackToTop />
+  </div>
+</template>

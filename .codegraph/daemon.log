@@ -26,3 +26,22 @@
 [CodeGraph daemon] socket error: write EPIPE
 [CodeGraph daemon] socket error: write EPIPE
 [CodeGraph daemon] socket error: write EPIPE
+[CodeGraph daemon] Listening on \\.\pipe\codegraph-4ce48f5ca6f5d9d1 (pid 25028, v0.9.9). Idle timeout 300000ms.
+[CodeGraph MCP] File watcher active — graph will auto-sync on changes
+[CodeGraph MCP] Caught up 1 file(s) changed since last run
+[CodeGraph MCP] Auto-synced 1 file(s) in 194ms
+[CodeGraph daemon] socket error: write EPIPE
+[CodeGraph daemon] socket error: write EPIPE
+[CodeGraph daemon] socket error: write EPIPE
+[CodeGraph daemon] socket error: write EPIPE
+[CodeGraph daemon] socket error: write EPIPE
+[CodeGraph daemon] socket error: write EPIPE
+[CodeGraph daemon] socket error: write EPIPE
+[CodeGraph daemon] socket error: write EPIPE
+[CodeGraph daemon] socket error: write EPIPE
+[CodeGraph daemon] socket error: write EPIPE
+[CodeGraph daemon] socket error: write EPIPE
+[CodeGraph daemon] socket error: write EPIPE
+[CodeGraph daemon] Another daemon (pid 25028) already holds the lock; exiting.
+[CodeGraph daemon] Another daemon (pid 25028) already holds the lock; exiting.
+[CodeGraph daemon] Another daemon (pid 25028) already holds the lock; exiting.

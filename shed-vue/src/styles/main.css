@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+/* ===== CSS 自定义属性 ===== */
+:root {
+  --color-primary: #4f8bae;
+  --color-primary-light: #e6f2f7;
+  --color-secondary: #ffb5b5;
+  --color-accent: #92cdd6;
+  --color-pink-light: #fcdcde;
+  --color-pastel-bg: #fffbf9;
+  --font-xiaolai: 'XiaolaiSC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+/* ===== 字体 ===== */
+@font-face {
+  font-family: 'XiaolaiSC';
+  src: url('/fonts/xiaolaisc-subset.woff2') format('woff2');
+  font-display: swap;
+}
+
+/* ===== 全局基础 ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-xiaolai);
+  background-color: #fdfdfd;
+  color: #4a4a4a;
+  overflow-x: hidden;
+}
+
+/* ===== 点状背景 ===== */
+.bg-dots {
+  background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+/* ===== Ruby 注音 ===== */
+ruby {
+  ruby-position: over;
+  padding: 0 3px;
+  cursor: default;
+  transition: color 0.2s;
+}
+ruby:hover {
+  color: var(--color-primary);
+}
+rt {
+  font-size: 0.65em;
+  color: var(--color-primary);
+  opacity: 0.8;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+/* ===== 渐变时间线 ===== */
+.timeline-line {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(to bottom, #dbeafe, #fed7aa, #fbcfe8);
+  border-radius: 99px;
+}
+@media (min-width: 768px) {
+  .timeline-line {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* ===== 滚动触发动画 ===== */
+.anim {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.anim.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== 毛玻璃导航 ===== */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(252, 220, 222, 0.3);
+}
+
+/* ===== 导航下划线动效 ===== */
+.nav-link-item {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-link-item::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+  border-radius: 99px;
+}
+.nav-link-item:hover::after {
+  width: 60%;
+}
+
+/* ===== 浮动装饰 ===== */
+.floating-ornament {
+  animation: float 6s ease-in-out infinite alternate;
+  user-select: none;
+}
+.floating-ornament:nth-child(2n) {
+  animation-duration: 8s;
+  animation-delay: 1.5s;
+}
+.floating-ornament:nth-child(3n) {
+  animation-duration: 10s;
+  animation-delay: 2.5s;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-18px) rotate(8deg); }
+}
+
+/* ===== 跑马灯 ===== */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  width: 100%;
+}
+.marquee-content {
+  display: inline-flex;
+  gap: 1.5rem;
+  animation: marquee-scroll 40s linear infinite;
+}
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+@keyframes marquee-scroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===== 打字光标 ===== */
+.typing-cursor {
+  border-right: 2px solid var(--color-primary);
+  padding-right: 2px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* ===== 选中颜色 ===== */
+::selection {
+  background: #fbcfe8;
+  color: #831843;
+}
+
+/* ===== 无滚动条 ===== */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
