@@ -46,3 +46,59 @@
 [CodeGraph daemon] Another daemon (pid 25028) already holds the lock; exiting.
 [CodeGraph daemon] Another daemon (pid 25028) already holds the lock; exiting.
 [CodeGraph daemon] Another daemon (pid 25028) already holds the lock; exiting.
+[CodeGraph daemon] Listening on \\.\pipe\codegraph-4ce48f5ca6f5d9d1 (pid 41332, v0.9.9). Idle timeout 300000ms.
+[CodeGraph MCP] File watcher active — graph will auto-sync on changes
+[CodeGraph MCP] Caught up 1 file(s) changed since last run
+[CodeGraph MCP] Auto-synced 1 file(s) in 212ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 559ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 287ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 247ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 279ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 235ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 225ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 225ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 238ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 220ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 237ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 221ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 224ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 211ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 204ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 257ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 222ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 210ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 233ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 234ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 214ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 282ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 284ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 226ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 237ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 231ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 210ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 233ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 411ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 221ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 230ms
+[CodeGraph MCP] Auto-synced 3 file(s) in 339ms
+[CodeGraph MCP] Auto-synced 1 file(s) in 219ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 218ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 232ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 267ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 217ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 218ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 213ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 215ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 274ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 247ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 208ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 229ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 214ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 223ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 218ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 214ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 206ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 227ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 214ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 251ms
+[CodeGraph MCP] Auto-synced 2 file(s) in 229ms

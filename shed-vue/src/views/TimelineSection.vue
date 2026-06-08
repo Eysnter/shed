@@ -1,5 +1,8 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const milestones = ref([
   {
@@ -200,7 +203,18 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div>
+  <section id="journal" class="journal-page">
+    <!-- 页面标题 -->
+    <div class="journal-header">
+      <div class="journal-header-badge">
+        <i class="fa-solid fa-feather-pointed"></i> Sweet Moments Journal
+      </div>
+      <h1 class="journal-title">
+        <span>生活中的小确幸手账</span>
+      </h1>
+      <p class="journal-subtitle">有些平凡温软的小事，在记忆的底片里，被揉进了细碎温柔的微光。</p>
+    </div>
+
     <!-- 控制面板 -->
     <section style="margin-bottom: 3rem; background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); padding: 1.5rem; border-radius: 32px; border: 1px solid rgba(214,211,209,0.5); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.07);">
       <div style="display: grid; grid-template-columns: 1fr; gap: 1rem; align-items: center;" class="ctrl-grid">
@@ -382,10 +396,58 @@ onUnmounted(() => {
         </transition-group>
       </main>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>
+.journal-page {
+  padding: 7rem 1.5rem 5rem;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.journal-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.journal-header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(236, 72, 153, 0.1);
+  border: 1px solid rgba(236, 72, 153, 0.2);
+  color: #ec4899;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.journal-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #1e293b;
+  margin-top: 16px;
+}
+
+.journal-title span {
+  background: linear-gradient(to right, #f43f5e, #a855f7, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.journal-subtitle {
+  color: #64748b;
+  max-width: 36rem;
+  margin: 8px auto 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
 @media (min-width: 1024px) {
   .tl-layout { grid-template-columns: 4fr 8fr !important; }
   .tl-sidebar { position: sticky; top: 100px; }

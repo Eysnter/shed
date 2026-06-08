@@ -2,6 +2,7 @@ export default {
   nav: {
     home: '主页',
     about: '简介',
+    journal: '小确幸手账',
     ask: '棉花糖',
     rec: '资源',
     blog: '工作台',
@@ -31,10 +32,12 @@ export default {
     handle: '@Eysnter',
     intro: {
       greeting: '幸识吖！这里是<strong>艾斯特</strong>，请多指教~',
-      location: '坐标<strong>湖北十堰</strong>，非常欢迎大家来我的家乡玩耍。',
+      bow: '超级大鞠躬！',
+      location: '坐标<strong>湖北十堰</strong>，非常欢迎大家来我的家乡玩耍 🏔️。',
       hobby: '兴趣：打游戏、刷番，以及疯狂贴贴各种可爱的纸面美少女。',
       dream: '梦想：对"钱钱"有着极度狂热的兴趣，努力向富婆进化中 (✧∇✧)',
-      attribute: '属性：一个偶尔被 Bug 气到抓狂、但绝大多数时候极其无情的敲代码机器。',
+      attribute: '属性：一个偶尔被 Bug 气到抓狂、但绝大多数时候极其无情的敲代码机器Coding Machine。',
+      food: '美食：各种热气腾腾的小火锅、甜甜的零食，是写代码时最不可缺少的燃料！',
     },
     params: {
       birthday: '🎂 生日',
@@ -49,13 +52,31 @@ export default {
     skills: {
       title: '⚡ 无情代码机的燃料储备',
       boost: '喂燃料充能',
-      cpp: 'C++ / ICPC 算法竞赛级',
-      python: 'Python / 标书查重系统研发',
-      js: 'JS / Tailwind 精致手账网页工坊',
-      boostMsg: '⚡ 燃料已加满！无情代码机正以 200% 的效率狂飙，Bug 减少 99%！',
+      items: [
+        { label: 'Java学习', target: 85 },
+        { label: 'Python / 标书查重系统', target: 80 },
+        { label: 'JavaWeb开发', target: 75 },
+      ],
+      boostMsg: '⚡ 燃料已加满！开发效率突破 200%！',
     },
     quote2: '" Vanitas vanitatum, et omnia vanitas. "',
     quoteText: '即便一切都是虚无，即便任何挣扎可能都毫无意义，我也绝对不会向虚无妥协，更不会停下敲击键盘的双手。为了守护住心中最温暖重要的冰屋避风港，艾斯特会一直战斗并敲出完美运行的代码！',
+    gramophone: {
+      title: '阿梓的心情八音盒 🎵',
+      hint: '点击触发阿梓的心情配音气泡',
+    },
+    vanitas: [
+      { title: '" Vanitas vanitatum, et omnia vanitas. "', text: '即便一切都是虚无，即便任何挣扎可能都毫无意义，我也绝对不会向虚无妥协，更不会停下敲击键盘的双手。为了守护住心中最温暖重要的冰屋避风港，艾斯特会一直战斗并敲出完美运行的代码！' },
+      { title: '" Dum spiro, spero. "', text: '只要我还在呼吸，我就心怀希望。在漫长而枯燥的代码编译世界里，每一个敲下的字符，都是我向美好明天发出的微光。加油，艾斯特！' },
+      { title: '" Per aspera ad astra. "', text: '循此苦旅，终抵群星。Bug 再多、困难再大，只要心中有那一团炉火，冰屋里也会充满战胜一切的无限勇气和极客浪漫！' },
+      { title: '" Sol lucet omnibus. "', text: '太阳照耀着每一个人。在这小小的数字温宿一隅，愿我写下的这行代码，能化作冬日里的一缕和煦日光，温暖每一个漂泊而至的灵魂。' },
+    ],
+    azusaQuotes: [
+      '无论未来如何，我也绝对不会放弃挣扎的！',
+      '虚无之虚无，一切都是虚无...即便是这样，那又如何呢！',
+      '老师，我的十字架和发卡...好看吗？',
+      '因为有老师在，日常，是会一直温柔延续的。',
+    ],
     azusa: {
       title: '🕊️ 吾之本命 · 白洲梓 (BA - 阿梓)',
       subtitle: '是我最爱的《蔚蓝档案》"冰之魔女"白洲梓，也是我敲代码的精神支柱！',

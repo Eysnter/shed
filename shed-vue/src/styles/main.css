@@ -171,3 +171,53 @@ rt {
 /* ===== 无滚动条 ===== */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ===== 漫游自动高光呼吸圈 ===== */
+.pulse-halo::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 9999px;
+  background: inherit;
+  opacity: 0.4;
+  animation: halo-scale 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes halo-scale {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+
+/* ===== 缝纫线手工质感导轨 ===== */
+.stitched-rail {
+  border-left: 3px dashed #cbd5e1;
+}
+
+/* ===== VUE 列表过滤重排 FLIP 动画 ===== */
+.timeline-list-move,
+.timeline-list-enter-active,
+.timeline-list-leave-active {
+  transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.timeline-list-enter-from {
+  opacity: 0;
+  transform: scale(0.9) translateY(40px);
+}
+.timeline-list-leave-to {
+  opacity: 0;
+  transform: scale(0.85) translateY(-30px);
+}
+.timeline-list-leave-active {
+  position: absolute;
+  width: 100%;
+}
+
+/* ===== 视差弹入动效 ===== */
+.scroll-pop-card {
+  opacity: 0;
+  transform: translateY(50px) scale(0.97);
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+}
+.scroll-pop-card.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}

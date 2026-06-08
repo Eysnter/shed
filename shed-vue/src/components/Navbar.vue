@@ -1,68 +1,44 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRoute, useRouter } from 'vue-router'
 import { useLanguageStore } from '../stores/language'
 
 const { t, locale } = useI18n()
 const langStore = useLanguageStore()
+const route = useRoute()
+const router = useRouter()
 const mobileOpen = ref(false)
 const isScrolled = ref(false)
-const activeSection = ref('home')
 
 const navLinks = [
-  { id: 'home', key: 'nav.home' },
-  { id: 'about', key: 'nav.about' },
-  { id: 'ask', key: 'nav.ask' },
-  { id: 'rec', key: 'nav.rec' },
-  { id: 'blog', key: 'nav.blog' },
-  { id: 'api', key: 'nav.api' },
-  { id: 'contact', key: 'nav.contact' },
+  { path: '/', key: 'nav.home', name: 'home' },
+  { path: '/about', key: 'nav.about', name: 'about' },
+  { path: '/journal', key: 'nav.journal', name: 'journal' },
+  { path: '/ask', key: 'nav.ask', name: 'ask' },
+  { path: '/rec', key: 'nav.rec', name: 'rec' },
+  { path: '/blog', key: 'nav.blog', name: 'blog' },
+  { path: '/api', key: 'nav.api', name: 'api' },
+  { path: '/contact', key: 'nav.contact', name: 'contact' },
 ]
 
-let observer = null
+const activeRoute = computed(() => route.name)
 
 function onScroll() {
   isScrolled.value = window.scrollY > 50
 }
 
-onMounted(() => {
-  window.addEventListener('scroll', onScroll)
-
-  // Scroll spy: 检测当前可见的区块
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          activeSection.value = entry.target.id
-        }
-      })
-    },
-    {
-      rootMargin: '-85px 0px -60% 0px',
-      threshold: 0,
-    }
-  )
-
-  navLinks.forEach(({ id }) => {
-    const el = document.getElementById(id)
-    if (el) observer.observe(el)
-  })
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', onScroll)
-  if (observer) observer.disconnect()
-})
+onMounted(() => { window.addEventListener('scroll', onScroll) })
+onUnmounted(() => { window.removeEventListener('scroll', onScroll) })
 
 function toggleLang() {
   langStore.toggle()
   locale.value = langStore.current
 }
 
-function scrollTo(id) {
+function navigateTo(path) {
   mobileOpen.value = false
-  const el = document.getElementById(id)
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  router.push(path)
 }
 </script>
 
@@ -71,23 +47,22 @@ function scrollTo(id) {
     <div class="nav-container">
       <div class="nav-inner">
         <!-- Logo -->
-        <a href="#" class="nav-brand" @click.prevent="scrollTo('home')">
+        <router-link to="/" class="nav-brand" @click="mobileOpen = false">
           <div class="nav-brand-icon">
             <i class="fa-solid fa-snowflake"></i>
           </div>
           <span class="nav-brand-text">Eysnter<span class="cn">.cn</span></span>
-        </a>
+        </router-link>
 
         <!-- Desktop Nav -->
         <nav class="nav-links">
-          <a
+          <router-link
             v-for="link in navLinks"
-            :key="link.id"
-            :href="'#' + link.id"
+            :key="link.name"
+            :to="link.path"
             class="nav-item"
-            :class="{ active: activeSection === link.id }"
-            @click.prevent="scrollTo(link.id)"
-          >{{ t(link.key) }}</a>
+            :class="{ active: activeRoute === link.name }"
+          >{{ t(link.key) }}</router-link>
           <a href="https://www.travellings.cn/go.html" target="_blank" class="nav-item nav-travellings">
             <i class="fa-solid fa-train-subway" style="font-size: 12px; margin-right: 4px;"></i>{{ t('nav.travellings') }}
           </a>
@@ -114,14 +89,14 @@ function scrollTo(id) {
     <!-- Mobile Menu -->
     <Transition name="slide-down">
       <div v-if="mobileOpen" class="mobile-menu">
-        <a
+        <router-link
           v-for="link in navLinks"
-          :key="link.id"
-          :href="'#' + link.id"
+          :key="link.name"
+          :to="link.path"
           class="mobile-link"
-          :class="{ 'mobile-active': activeSection === link.id }"
-          @click.prevent="scrollTo(link.id)"
-        >{{ t(link.key) }}</a>
+          :class="{ 'mobile-active': activeRoute === link.name }"
+          @click="mobileOpen = false"
+        >{{ t(link.key) }}</router-link>
         <a href="https://www.travellings.cn/go.html" target="_blank" class="mobile-link mobile-travellings">
           <i class="fa-solid fa-train-subway" style="font-size: 12px; margin-right: 6px;"></i>{{ t('nav.travellings') }}
         </a>
@@ -229,13 +204,11 @@ function scrollTo(id) {
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 悬停 */
 .nav-item:hover {
   color: #4f8bae;
   background: rgba(230, 242, 247, 0.5);
 }
 
-/* 下划线动画 */
 .nav-item::after {
   content: '';
   position: absolute;
@@ -253,7 +226,6 @@ function scrollTo(id) {
   width: 60%;
 }
 
-/* 活动指示器：当前区块高亮 */
 .nav-item.active {
   color: #4f8bae;
   background: rgba(230, 242, 247, 0.5);
@@ -263,7 +235,6 @@ function scrollTo(id) {
   width: 60%;
 }
 
-/* 开往 */
 .nav-travellings {
   color: #f97316 !important;
   font-weight: 700;
