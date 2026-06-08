@@ -94,7 +94,6 @@ html {
 
 body {
   font-family: var(--font-xiaolai);
-  background-color: #fdfdfd;
   color: #4a4a4a;
   overflow-x: hidden;
 }
@@ -108,8 +107,6 @@ body {
 .app-root {
   min-height: 100vh;
   position: relative;
-  background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
-  background-size: 24px 24px;
 }
 
 /* 粒子画布 */

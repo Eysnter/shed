@@ -73,7 +73,7 @@ function scrollTo(id) {
         <!-- Logo -->
         <a href="#" class="nav-brand" @click.prevent="scrollTo('home')">
           <div class="nav-brand-icon">
-            <i class="fa fa-snowflake-o"></i>
+            <i class="fa-solid fa-snowflake"></i>
           </div>
           <span class="nav-brand-text">Eysnter<span class="cn">.cn</span></span>
         </a>
@@ -89,14 +89,14 @@ function scrollTo(id) {
             @click.prevent="scrollTo(link.id)"
           >{{ t(link.key) }}</a>
           <a href="https://www.travellings.cn/go.html" target="_blank" class="nav-item nav-travellings">
-            <i class="fa fa-subway" style="font-size: 12px; margin-right: 4px;"></i>{{ t('nav.travellings') }}
+            <i class="fa-solid fa-train-subway" style="font-size: 12px; margin-right: 4px;"></i>{{ t('nav.travellings') }}
           </a>
         </nav>
 
         <!-- Lang Switch -->
         <div class="nav-right">
           <button @click="toggleLang" class="lang-btn">
-            <i class="fa fa-globe"></i>
+            <i class="fa-solid fa-globe"></i>
             <span v-if="langStore.current === 'zh'">日本語へ</span>
             <span v-else>中国語に</span>
           </button>
@@ -123,7 +123,7 @@ function scrollTo(id) {
           @click.prevent="scrollTo(link.id)"
         >{{ t(link.key) }}</a>
         <a href="https://www.travellings.cn/go.html" target="_blank" class="mobile-link mobile-travellings">
-          <i class="fa fa-subway" style="font-size: 12px; margin-right: 6px;"></i>{{ t('nav.travellings') }}
+          <i class="fa-solid fa-train-subway" style="font-size: 12px; margin-right: 6px;"></i>{{ t('nav.travellings') }}
         </a>
       </div>
     </Transition>

@@ -26,6 +26,8 @@ html {
 body {
   font-family: var(--font-xiaolai);
   background-color: #fdfdfd;
+  background-image: radial-gradient(#cbd5e1 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
   color: #4a4a4a;
   overflow-x: hidden;
 }

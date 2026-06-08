@@ -22,7 +22,7 @@ function scrollToTop() {
       @click="scrollToTop"
       class="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-white/90 backdrop-blur-md border border-slate-200 text-gray-500 hover:text-[#4f8bae] hover:shadow-lg transition-all flex items-center justify-center shadow-md hover:-translate-y-0.5"
     >
-      <i class="fa fa-chevron-up text-lg"></i>
+      <i class="fa-solid fa-chevron-up text-lg"></i>
     </button>
   </Transition>
 </template>
