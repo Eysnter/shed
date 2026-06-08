@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>导航栏和背景组件</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+  <style>
+    /* ===== 全局变量和字体 ===== */
+    :root {
+      --color-primary: #4f8bae;
+      --color-primary-light: #e6f2f7;
+      --color-secondary: #ffb5b5;
+      --color-accent: #92cdd6;
+      --color-pink-light: #fcdcde;
+      --font-xiaolai: 'XiaolaiSC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+
+    @font-face {
+      font-family: 'XiaolaiSC';
+      src: url('/fonts/xiaolaisc-subset.woff2') format('woff2');
+      font-display: swap;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-xiaolai);
+      color: #4a4a4a;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: #fbcfe8;
+      color: #831843;
+    }
+
+    .app-root {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-content {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      padding-top: 85px;
+    }
+
+    /* ===== 背景粒子画布 ===== */
+    .particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ===== 导航栏样式 ===== */
+    .nav-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 0;
+      background-color: rgba(255, 255, 255, 0.7);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(252, 220, 222, 0.3);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease-out;
+    }
+
+    .nav-scrolled {
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 85px;
+      position: relative;
+    }
+
+    /* Brand */
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      padding: 0;
+    }
+
+    .nav-brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #4f8bae, #92cdd6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+      box-shadow: 0 2px 8px rgba(79, 139, 174, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .nav-brand:hover .nav-brand-icon {
+      transform: rotate(15deg) scale(1.1);
+    }
+
+    .nav-brand-text {
+      font-family: 'XiaolaiSC', 'PingFang SC', 'Microsoft YaHei', monospace;
+      font-size: 20px;
+      font-weight: 900;
+      color: #333;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+
+    .nav-brand-text .cn {
+      color: #ffb5b5;
+      font-weight: 700;
+    }
+
+    .nav-brand:hover .nav-brand-text {
+      color: #4f8bae;
+    }
+
+    /* Desktop Nav Links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'XiaolaiSC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+
+    .nav-item {
+      font-size: 14px;
+      color: #666;
+      font-weight: 600;
+      position: relative;
+      padding: 8px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-item:hover {
+      color: #4f8bae;
+      background: rgba(230, 242, 247, 0.5);
+    }
+
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: #4f8bae;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(-50%);
+      border-radius: 99px;
+    }
+
+    .nav-item:hover::after {
+      width: 60%;
+    }
+
+    .nav-item.active {
+      color: #4f8bae;
+      background: rgba(230, 242, 247, 0.5);
+    }
+
+    .nav-item.active::after {
+      width: 60%;
+    }
+
+    .nav-travellings {
+      color: #f97316 !important;
+      font-weight: 700;
+    }
+    .nav-travellings:hover {
+      background: rgba(249, 115, 22, 0.08) !important;
+    }
+
+    /* Lang Button */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      border: 1px solid #fecdd3;
+      font-size: 12px;
+      font-weight: 700;
+      color: #8a8fa3;
+      background: white;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .lang-btn:hover {
+      border-color: #4f8bae;
+      color: #4f8bae;
+      box-shadow: 0 1px 4px rgba(79, 139, 174, 0.15);
+    }
+    .lang-btn:active {
+      transform: scale(0.95);
+    }
+
+    .lang-btn i {
+      animation: spin 15s linear infinite;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Mobile Toggle */
+    .mobile-toggle {
+      display: none;
+      flex-direction: column;
+      padding: 8px 10px;
+      border: none;
+      border-radius: 12px;
+      background: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .mobile-toggle:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .toggler-icon {
+      width: 22px;
+      height: 2px;
+      background-color: #555;
+      margin: 4px 0;
+      display: block;
+      position: relative;
+      border-radius: 2px;
+      transition: all 0.3s ease-out;
+    }
+
+    .mobile-toggle.active .toggler-icon:nth-of-type(1) {
+      transform: rotate(45deg);
+      top: 6px;
+    }
+    .mobile-toggle.active .toggler-icon:nth-of-type(2) {
+      opacity: 0;
+    }
+    .mobile-toggle.active .toggler-icon:nth-of-type(3) {
+      transform: rotate(-45deg);
+      top: -6px;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      padding: 8px 16px 20px;
+      background: rgba(255, 255, 255, 0.95);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(252, 220, 222, 0.4);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      border-radius: 0 0 16px 16px;
+    }
+
+    .mobile-link {
+      display: block;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #374151;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .mobile-link:hover {
+      background: rgba(230, 242, 247, 0.5);
+      color: #4f8bae;
+    }
+    .mobile-link.mobile-active {
+      color: #4f8bae;
+      background: rgba(230, 242, 247, 0.5);
+    }
+    .mobile-travellings {
+      color: #f97316 !important;
+      font-weight: 700;
+    }
+
+    /* Responsive */
+    @media (max-width: 767px) {
+      .nav-links, .nav-right {
+        display: none;
+      }
+      .mobile-toggle, .mobile-menu {
+        display: flex;
+      }
+    }
+
+    .slide-down-enter-active, .slide-down-leave-active {
+      transition: all 0.3s ease;
+    }
+    .slide-down-enter-from, .slide-down-leave-to {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    /* Ruby 注音 */
+    ruby {
+      ruby-position: over;
+      padding: 0 3px;
+      cursor: default;
+      transition: color 0.2s;
+    }
+    ruby:hover {
+      color: var(--color-primary);
+    }
+    rt {
+      font-size: 0.65em;
+      color: var(--color-primary);
+      opacity: 0.8;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+    }
+
+    /* 页面切换过渡 */
+    .page-fade-enter-active,
+    .page-fade-leave-active {
+      transition: opacity 0.3s ease;
+    }
+    .page-fade-enter-from,
+    .page-fade-leave-to {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-root">
+    <!-- 背景粒子画布 -->
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+
+    <!-- 导航栏 -->
+    <header class="nav-header" id="navHeader">
+      <div class="nav-container">
+        <div class="nav-inner">
+          <!-- Logo -->
+          <a href="/" class="nav-brand">
+            <div class="nav-brand-icon">
+              <i class="fa-solid fa-snowflake"></i>
+            </div>
+            <span class="nav-brand-text">Eysnter<span class="cn">.cn</span></span>
+          </a>
+
+          <!-- Desktop Nav -->
+          <nav class="nav-links">
+            <a href="/" class="nav-item active">首页</a>
+            <a href="/about" class="nav-item">关于</a>
+            <a href="/journal" class="nav-item">日志</a>
+            <a href="/ask" class="nav-item">问答</a>
+            <a href="/rec" class="nav-item">推荐</a>
+            <a href="/blog" class="nav-item">博客</a>
+            <a href="/api" class="nav-item">API</a>
+            <a href="/contact" class="nav-item">联系</a>
+            <a href="https://www.travellings.cn/go.html" target="_blank" class="nav-item nav-travellings">
+              <i class="fa-solid fa-train-subway" style="font-size: 12px; margin-right: 4px;"></i>开往
+            </a>
+          </nav>
+
+          <!-- Lang Switch -->
+          <div class="nav-right">
+            <button class="lang-btn" id="langBtn">
+              <i class="fa-solid fa-globe"></i>
+              <span>日本語へ</span>
+            </button>
+          </div>
+
+          <!-- Mobile Toggle -->
+          <button class="mobile-toggle" id="mobileToggle">
+            <span class="toggler-icon"></span>
+            <span class="toggler-icon"></span>
+            <span class="toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="/" class="mobile-link mobile-active">首页</a>
+        <a href="/about" class="mobile-link">关于</a>
+        <a href="/journal" class="mobile-link">日志</a>
+        <a href="/ask" class="mobile-link">问答</a>
+        <a href="/rec" class="mobile-link">推荐</a>
+        <a href="/blog" class="mobile-link">博客</a>
+        <a href="/api" class="mobile-link">API</a>
+        <a href="/contact" class="mobile-link">联系</a>
+        <a href="https://www.travellings.cn/go.html" target="_blank" class="mobile-link mobile-travellings">
+          <i class="fa-solid fa-train-subway" style="font-size: 12px; margin-right: 6px;"></i>开往
+        </a>
+      </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="main-content">
+      <div style="text-align: center; padding: 100px 20px;">
+        <h1 style="font-size: 2.5rem; color: #4f8bae; margin-bottom: 20px;">导航栏和背景组件</h1>
+        <p style="font-size: 1.2rem; color: #666; max-width: 600px; margin: 0 auto;">
+          这是一个展示导航栏和背景粒子效果的示例页面。<br>
+          包含完整的导航栏组件和樱雪粒子背景动画。
+        </p>
+        <div style="margin-top: 40px;">
+          <a href="#features" style="display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, #4f8bae, #92cdd6); color: white; text-decoration: none; border-radius: 25px; font-weight: 600; transition: transform 0.3s;">
+            查看特性
+          </a>
+        </div>
+      </div>
+
+      <section id="features" style="max-width: 1200px; margin: 0 auto; padding: 60px 20px;">
+        <h2 style="text-align: center; color: #4f8bae; margin-bottom: 40px;">组件特性</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+          <div style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+            <h3 style="color: #4f8bae; margin-bottom: 15px;">🎨 响应式导航栏</h3>
+            <p style="color: #666; line-height: 1.6;">支持桌面端和移动端自适应，包含毛玻璃效果、滚动变化、移动端汉堡菜单等特性。</p>
+          </div>
+          <div style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+            <h3 style="color: #4f8bae; margin-bottom: 15px;">✨ 粒子背景动画</h3>
+            <p style="color: #666; line-height: 1.6;">樱雪粒子效果，支持鼠标交互，粒子会跟随鼠标移动产生排斥效果。</p>
+          </div>
+          <div style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+            <h3 style="color: #4f8bae; margin-bottom: 15px;">🎭 丰富的动画效果</h3>
+            <p style="color: #666; line-height: 1.6;">包含悬浮效果、下划线动画、品牌图标旋转、语言切换按钮动画等。</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // ===== 背景樱雪粒子画布 =====
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animFrame = null;
+    let pmouseX = -1000;
+    let pmouseY = -1000;
+    const MAX_PARTICLES = 55;
+    const PARTICLE_COLOR = [255, 181, 181];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = Math.max(document.documentElement.scrollHeight, window.innerHeight);
+    }
+
+    function initParticles() {
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+
+      for (let i = 0; i < MAX_PARTICLES; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 3.5 + 1,
+          d: Math.random() * MAX_PARTICLES,
+          speed: Math.random() * 0.8 + 0.3,
+          opacity: Math.random() * 0.5 + 0.2,
+        });
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        pmouseX = e.pageX;
+        pmouseY = e.pageY;
+      });
+
+      window.addEventListener('mouseleave', () => {
+        pmouseX = -1000;
+        pmouseY = -1000;
+      });
+
+      draw();
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < MAX_PARTICLES; i++) {
+        const p = particles[i];
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+        ctx.fillStyle = `rgba(${PARTICLE_COLOR[0]}, ${PARTICLE_COLOR[1]}, ${PARTICLE_COLOR[2]}, ${p.opacity})`;
+        ctx.fill();
+
+        p.y += p.speed;
+        p.x += Math.sin(p.d / 10) * 0.4;
+
+        const dx = p.x - pmouseX;
+        const dy = p.y - pmouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 100) {
+          const force = (100 - dist) / 100;
+          p.x += (dx / dist) * force * 10;
+          p.y += (dy / dist) * force * 10;
+        }
+
+        if (p.y > canvas.height) {
+          particles[i] = {
+            x: Math.random() * canvas.width,
+            y: -10,
+            r: p.r,
+            d: p.d,
+            speed: p.speed,
+            opacity: p.opacity
+          };
+        }
+      }
+      animFrame = requestAnimationFrame(draw);
+    }
+
+    // ===== 导航栏滚动效果 =====
+    const navHeader = document.getElementById('navHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navHeader.classList.add('nav-scrolled');
+      } else {
+        navHeader.classList.remove('nav-scrolled');
+      }
+    });
+
+    // ===== 移动端菜单切换 =====
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileToggle.addEventListener('click', () => {
+      mobileToggle.classList.toggle('active');
+      mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // ===== 语言切换 =====
+    const langBtn = document.getElementById('langBtn');
+    let currentLang = 'zh';
+    langBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'zh' ? 'ja' : 'zh';
+      langBtn.querySelector('span').textContent = currentLang === 'zh' ? '日本語へ' : '中国語に';
+    });
+
+    // ===== 初始化 =====
+    initParticles();
+  </script>
+</body>
+</html>

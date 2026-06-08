@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x4e3b;&#x9875;&#x548c;&#x5bfc;&#x822a;&#x680f;&#x4ee3;&#x7801;&#x6587;&#x6863;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <span id="markdown-mermaid" aria-hidden="true" data-config="{&quot;darkModeTheme&quot;:&quot;vscode&quot;,&quot;lightModeTheme&quot;:&quot;vscode&quot;,&quot;maxTextSize&quot;:50000,&quot;clickDrag&quot;:&quot;alt&quot;,&quot;showControls&quot;:&quot;onHoverOrFocus&quot;,&quot;resizable&quot;:true,&quot;maxHeight&quot;:&quot;&quot;}"></span>
+				<h1 id="主页和导航栏代码文档">主页和导航栏代码文档</h1>
+<h2 id="项目概述">项目概述</h2>
+<p>本文档详细描述了 shed-vue 项目中主页（HomeSection）和导航栏（Navbar）相关的所有代码文件、组件结构、样式定义和交互逻辑。</p>
+<hr>
+<h2 id="目录结构">目录结构</h2>
+<pre><code>shed-vue/
+├── src/
+│   ├── App.vue                    # 根组件（包含背景粒子画布）
+│   ├── components/
+│   │   └── Navbar.vue             # 导航栏组件
+│   ├── views/
+│   │   └── HomeSection.vue        # 主页组件
+│   ├── router/
+│   │   └── index.js               # 路由配置
+│   ├── styles/
+│   │   └── main.css               # 全局样式
+│   └── i18n/
+│       ├── index.js               # 国际化配置
+│       ├── zh.js                  # 中文翻译
+│       └── ja.js                  # 日语翻译
+└── 页面/
+    ├── 组件.html                  # 组件示例文件
+    └── 主页和导航栏代码文档.md      # 本文档
+</code></pre>
+<hr>
+<h2 id="1-根组件-appvue">1. 根组件 (App.vue)</h2>
+<h3 id="文件位置">文件位置</h3>
+<p><code>src/App.vue</code></p>
+<h3 id="功能描述">功能描述</h3>
+<ul>
+<li>应用的根组件</li>
+<li>包含背景粒子画布</li>
+<li>布局整体页面结构</li>
+<li>集成导航栏和页脚</li>
+</ul>
+<h3 id="核心代码结构">核心代码结构</h3>
+<h4 id="11-背景粒子画布">1.1 背景粒子画布</h4>
+<pre><code class="language-vue">&lt;script setup&gt;
+// 背景樱雪粒子画布（内联）
+const canvasRef = ref(null)
+let particles = []
+let animFrame = null
+let pmouseX = -1000
+let pmouseY = -1000
+const MAX_PARTICLES = 55
+const PARTICLE_COLOR = [255, 181, 181]
+
+function initParticles() {
+  const canvas = canvasRef.value
+  if (!canvas) return
+  const ctx = canvas.getContext('2d')
+
+  function resize() {
+    canvas.width = window.innerWidth
+    canvas.height = Math.max(document.documentElement.scrollHeight, window.innerHeight)
+  }
+  resize()
+  window.addEventListener('resize', resize)
+
+  // 创建55个粒子
+  for (let i = 0; i &lt; MAX_PARTICLES; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 3.5 + 1,        // 半径：1-4.5
+      d: Math.random() * MAX_PARTICLES,   // 深度参数
+      speed: Math.random() * 0.8 + 0.3,  // 速度：0.3-1.1
+      opacity: Math.random() * 0.5 + 0.2, // 透明度：0.2-0.7
+    })
+  }
+
+  // 鼠标交互
+  const moveHandler = (e) =&gt; { pmouseX = e.pageX; pmouseY = e.pageY }
+  const leaveHandler = () =&gt; { pmouseX = -1000; pmouseY = -1000 }
+  window.addEventListener('mousemove', moveHandler)
+  window.addEventListener('mouseleave', leaveHandler)
+
+  // 绘制循环
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    for (let i = 0; i &lt; MAX_PARTICLES; i++) {
+      const p = particles[i]
+      ctx.beginPath()
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true)
+      ctx.fillStyle = `rgba(${PARTICLE_COLOR[0]}, ${PARTICLE_COLOR[1]}, ${PARTICLE_COLOR[2]}, ${p.opacity})`
+      ctx.fill()
+
+      // 粒子运动
+      p.y += p.speed
+      p.x += Math.sin(p.d / 10) * 0.4
+
+      // 鼠标排斥效果
+      const dx = p.x - pmouseX
+      const dy = p.y - pmouseY
+      const dist = Math.sqrt(dx * dx + dy * dy)
+      if (dist &lt; 100) {
+        const force = (100 - dist) / 100
+        p.x += (dx / dist) * force * 10
+        p.y += (dy / dist) * force * 10
+      }
+
+      // 粒子重置
+      if (p.y &gt; canvas.height) {
+        particles[i] = { x: Math.random() * canvas.width, y: -10, r: p.r, d: p.d, speed: p.speed, opacity: p.opacity }
+      }
+    }
+    animFrame = requestAnimationFrame(draw)
+  }
+  draw()
+}
+
+onMounted(initParticles)
+onUnmounted(() =&gt; { if (animFrame) cancelAnimationFrame(animFrame) })
+&lt;/script&gt;
+</code></pre>
+<h4 id="12-模板结构">1.2 模板结构</h4>
+<pre><code class="language-vue">&lt;template&gt;
+  &lt;div class=&quot;app-root&quot;&gt;
+    &lt;!-- 背景粒子画布 --&gt;
+    &lt;canvas ref=&quot;canvasRef&quot; class=&quot;particle-canvas&quot;&gt;&lt;/canvas&gt;
+
+    &lt;!-- 导航栏 --&gt;
+    &lt;Navbar /&gt;
+
+    &lt;!-- 主要内容 --&gt;
+    &lt;main class=&quot;main-content&quot;&gt;
+      &lt;router-view v-slot=&quot;{ Component }&quot;&gt;
+        &lt;transition name=&quot;page-fade&quot; mode=&quot;out-in&quot;&gt;
+          &lt;component :is=&quot;Component&quot; /&gt;
+        &lt;/transition&gt;
+      &lt;/router-view&gt;
+    &lt;/main&gt;
+
+    &lt;!-- 页脚 --&gt;
+    &lt;FooterSection /&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+</code></pre>
+<h4 id="13-全局样式">1.3 全局样式</h4>
+<pre><code class="language-css"><span class="hljs-selector-pseudo">:root</span> {
+  <span class="hljs-attr">--color-primary</span>: <span class="hljs-number">#4f8bae</span>;
+  <span class="hljs-attr">--color-primary-light</span>: <span class="hljs-number">#e6f2f7</span>;
+  <span class="hljs-attr">--color-secondary</span>: <span class="hljs-number">#ffb5b5</span>;
+  <span class="hljs-attr">--color-accent</span>: <span class="hljs-number">#92cdd6</span>;
+  <span class="hljs-attr">--color-pink-light</span>: <span class="hljs-number">#fcdcde</span>;
+  <span class="hljs-attr">--font-xiaolai</span>: <span class="hljs-string">&#x27;XiaolaiSC&#x27;</span>, <span class="hljs-string">&#x27;PingFang SC&#x27;</span>, <span class="hljs-string">&#x27;Microsoft YaHei&#x27;</span>, sans-serif;
+}
+
+* {
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">box-sizing</span>: border-box;
+}
+
+<span class="hljs-selector-tag">html</span> {
+  scroll-behavior: smooth;
+}
+
+<span class="hljs-selector-tag">body</span> {
+  <span class="hljs-attribute">font-family</span>: <span class="hljs-built_in">var</span>(--font-xiaolai);
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#4a4a4a</span>;
+  <span class="hljs-attribute">overflow-x</span>: hidden;
+}
+
+<span class="hljs-selector-class">.app-root</span> {
+  <span class="hljs-attribute">min-height</span>: <span class="hljs-number">100vh</span>;
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">flex-direction</span>: column;
+}
+
+<span class="hljs-selector-class">.main-content</span> {
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">z-index</span>: <span class="hljs-number">1</span>;
+  <span class="hljs-attribute">flex</span>: <span class="hljs-number">1</span>;
+}
+
+<span class="hljs-selector-class">.particle-canvas</span> {
+  <span class="hljs-attribute">position</span>: fixed;
+  <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">z-index</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">pointer-events</span>: none;
+}
+</code></pre>
+<hr>
+<h2 id="2-导航栏组件-navbarvue">2. 导航栏组件 (Navbar.vue)</h2>
+<h3 id="文件位置-1">文件位置</h3>
+<p><code>src/components/Navbar.vue</code></p>
+<h3 id="功能描述-1">功能描述</h3>
+<ul>
+<li>固定顶部导航栏</li>
+<li>响应式设计（桌面端/移动端）</li>
+<li>毛玻璃效果</li>
+<li>滚动时背景变化</li>
+<li>语言切换功能</li>
+<li>移动端汉堡菜单</li>
+</ul>
+<h3 id="核心代码结构-1">核心代码结构</h3>
+<h4 id="21-脚本逻辑">2.1 脚本逻辑</h4>
+<pre><code class="language-vue">&lt;script setup&gt;
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRoute, useRouter } from 'vue-router'
+import { useLanguageStore } from '../stores/language'
+
+const { t, locale } = useI18n()
+const langStore = useLanguageStore()
+const route = useRoute()
+const router = useRouter()
+const mobileOpen = ref(false)
+const isScrolled = ref(false)
+
+// 导航链接配置
+const navLinks = [
+  { path: '/', key: 'nav.home', name: 'home' },
+  { path: '/about', key: 'nav.about', name: 'about' },
+  { path: '/journal', key: 'nav.journal', name: 'journal' },
+  { path: '/ask', key: 'nav.ask', name: 'ask' },
+  { path: '/rec', key: 'nav.rec', name: 'rec' },
+  { path: '/blog', key: 'nav.blog', name: 'blog' },
+  { path: '/api', key: 'nav.api', name: 'api' },
+  { path: '/contact', key: 'nav.contact', name: 'contact' },
+]
+
+const activeRoute = computed(() =&gt; route.name)
+
+// 滚动检测
+function onScroll() {
+  isScrolled.value = window.scrollY &gt; 50
+}
+
+onMounted(() =&gt; { window.addEventListener('scroll', onScroll) })
+onUnmounted(() =&gt; { window.removeEventListener('scroll', onScroll) })
+
+// 语言切换
+function toggleLang() {
+  langStore.toggle()
+  locale.value = langStore.current
+}
+
+// 移动端导航
+function navigateTo(path) {
+  mobileOpen.value = false
+  router.push(path)
+}
+&lt;/script&gt;
+</code></pre>
+<h4 id="22-模板结构">2.2 模板结构</h4>
+<pre><code class="language-vue">&lt;template&gt;
+  &lt;header class=&quot;nav-header&quot; :class=&quot;{ 'nav-scrolled': isScrolled }&quot;&gt;
+    &lt;div class=&quot;nav-container&quot;&gt;
+      &lt;div class=&quot;nav-inner&quot;&gt;
+        &lt;!-- Logo --&gt;
+        &lt;router-link to=&quot;/&quot; class=&quot;nav-brand&quot; @click=&quot;mobileOpen = false&quot;&gt;
+          &lt;div class=&quot;nav-brand-icon&quot;&gt;
+            &lt;i class=&quot;fa-solid fa-snowflake&quot;&gt;&lt;/i&gt;
+          &lt;/div&gt;
+          &lt;span class=&quot;nav-brand-text&quot;&gt;Eysnter&lt;span class=&quot;cn&quot;&gt;.cn&lt;/span&gt;&lt;/span&gt;
+        &lt;/router-link&gt;
+
+        &lt;!-- Desktop Nav --&gt;
+        &lt;nav class=&quot;nav-links&quot;&gt;
+          &lt;router-link
+            v-for=&quot;link in navLinks&quot;
+            :key=&quot;link.name&quot;
+            :to=&quot;link.path&quot;
+            class=&quot;nav-item&quot;
+            :class=&quot;{ active: activeRoute === link.name }&quot;
+          &gt;{{ t(link.key) }}&lt;/router-link&gt;
+          &lt;a href=&quot;https://www.travellings.cn/go.html&quot; target=&quot;_blank&quot; class=&quot;nav-item nav-travellings&quot;&gt;
+            &lt;i class=&quot;fa-solid fa-train-subway&quot; style=&quot;font-size: 12px; margin-right: 4px;&quot;&gt;&lt;/i&gt;{{ t('nav.travellings') }}
+          &lt;/a&gt;
+        &lt;/nav&gt;
+
+        &lt;!-- Lang Switch --&gt;
+        &lt;div class=&quot;nav-right&quot;&gt;
+          &lt;button @click=&quot;toggleLang&quot; class=&quot;lang-btn&quot;&gt;
+            &lt;i class=&quot;fa-solid fa-globe&quot;&gt;&lt;/i&gt;
+            &lt;span v-if=&quot;langStore.current === 'zh'&quot;&gt;日本語へ&lt;/span&gt;
+            &lt;span v-else&gt;中国語に&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Mobile Toggle --&gt;
+        &lt;button class=&quot;mobile-toggle&quot; @click=&quot;mobileOpen = !mobileOpen&quot; :class=&quot;{ active: mobileOpen }&quot;&gt;
+          &lt;span class=&quot;toggler-icon&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;toggler-icon&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;toggler-icon&quot;&gt;&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Mobile Menu --&gt;
+    &lt;Transition name=&quot;slide-down&quot;&gt;
+      &lt;div v-if=&quot;mobileOpen&quot; class=&quot;mobile-menu&quot;&gt;
+        &lt;router-link
+          v-for=&quot;link in navLinks&quot;
+          :key=&quot;link.name&quot;
+          :to=&quot;link.path&quot;
+          class=&quot;mobile-link&quot;
+          :class=&quot;{ 'mobile-active': activeRoute === link.name }&quot;
+          @click=&quot;mobileOpen = false&quot;
+        &gt;{{ t(link.key) }}&lt;/router-link&gt;
+        &lt;a href=&quot;https://www.travellings.cn/go.html&quot; target=&quot;_blank&quot; class=&quot;mobile-link mobile-travellings&quot;&gt;
+          &lt;i class=&quot;fa-solid fa-train-subway&quot; style=&quot;font-size: 12px; margin-right: 6px;&quot;&gt;&lt;/i&gt;{{ t('nav.travellings') }}
+        &lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/Transition&gt;
+  &lt;/header&gt;
+&lt;/template&gt;
+</code></pre>
+<h4 id="23-样式定义">2.3 样式定义</h4>
+<pre><code class="language-css"><span class="hljs-comment">/* 导航栏基础样式 */</span>
+<span class="hljs-selector-class">.nav-header</span> {
+  <span class="hljs-attribute">position</span>: fixed;
+  <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">right</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">z-index</span>: <span class="hljs-number">50</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0.7</span>);
+  -webkit-backdrop-<span class="hljs-attribute">filter</span>: <span class="hljs-built_in">blur</span>(<span class="hljs-number">12px</span>);
+  backdrop-<span class="hljs-attribute">filter</span>: <span class="hljs-built_in">blur</span>(<span class="hljs-number">12px</span>);
+  <span class="hljs-attribute">border-bottom</span>: <span class="hljs-number">1px</span> solid <span class="hljs-built_in">rgba</span>(<span class="hljs-number">252</span>, <span class="hljs-number">220</span>, <span class="hljs-number">222</span>, <span class="hljs-number">0.3</span>);
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-number">3px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.04</span>);
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.3s</span> ease-out;
+}
+
+<span class="hljs-comment">/* 滚动状态 */</span>
+<span class="hljs-selector-class">.nav-scrolled</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0.9</span>);
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">2px</span> <span class="hljs-number">8px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.06</span>);
+}
+
+<span class="hljs-comment">/* 容器布局 */</span>
+<span class="hljs-selector-class">.nav-container</span> {
+  <span class="hljs-attribute">max-width</span>: <span class="hljs-number">1200px</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">15px</span>;
+}
+
+<span class="hljs-selector-class">.nav-inner</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">justify-content</span>: space-between;
+  <span class="hljs-attribute">min-height</span>: <span class="hljs-number">85px</span>;
+  <span class="hljs-attribute">position</span>: relative;
+}
+
+<span class="hljs-comment">/* Brand Logo */</span>
+<span class="hljs-selector-class">.nav-brand</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">gap</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">text-decoration</span>: none;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-selector-class">.nav-brand-icon</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">36px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">36px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">linear-gradient</span>(<span class="hljs-number">135deg</span>, <span class="hljs-number">#4f8bae</span>, <span class="hljs-number">#92cdd6</span>);
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">2px</span> <span class="hljs-number">8px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">79</span>, <span class="hljs-number">139</span>, <span class="hljs-number">174</span>, <span class="hljs-number">0.3</span>);
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.3s</span> ease;
+}
+
+<span class="hljs-selector-class">.nav-brand</span><span class="hljs-selector-pseudo">:hover</span> <span class="hljs-selector-class">.nav-brand-icon</span> {
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(<span class="hljs-number">15deg</span>) <span class="hljs-built_in">scale</span>(<span class="hljs-number">1.1</span>);
+}
+
+<span class="hljs-selector-class">.nav-brand-text</span> {
+  <span class="hljs-attribute">font-family</span>: <span class="hljs-string">&#x27;XiaolaiSC&#x27;</span>, <span class="hljs-string">&#x27;PingFang SC&#x27;</span>, <span class="hljs-string">&#x27;Microsoft YaHei&#x27;</span>, monospace;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">900</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#333</span>;
+  <span class="hljs-attribute">letter-spacing</span>: <span class="hljs-number">0.05em</span>;
+  <span class="hljs-attribute">transition</span>: color <span class="hljs-number">0.3s</span>;
+}
+
+<span class="hljs-selector-class">.nav-brand-text</span> <span class="hljs-selector-class">.cn</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#ffb5b5</span>;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">700</span>;
+}
+
+<span class="hljs-selector-class">.nav-brand</span><span class="hljs-selector-pseudo">:hover</span> <span class="hljs-selector-class">.nav-brand-text</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#4f8bae</span>;
+}
+
+<span class="hljs-comment">/* 导航链接 */</span>
+<span class="hljs-selector-class">.nav-links</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">gap</span>: <span class="hljs-number">4px</span>;
+  <span class="hljs-attribute">font-family</span>: <span class="hljs-string">&#x27;XiaolaiSC&#x27;</span>, <span class="hljs-string">&#x27;PingFang SC&#x27;</span>, <span class="hljs-string">&#x27;Microsoft YaHei&#x27;</span>, sans-serif;
+}
+
+<span class="hljs-selector-class">.nav-item</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#666</span>;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">600</span>;
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">8px</span> <span class="hljs-number">14px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">text-decoration</span>: none;
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.25s</span> <span class="hljs-built_in">cubic-bezier</span>(<span class="hljs-number">0.4</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">1</span>);
+}
+
+<span class="hljs-selector-class">.nav-item</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#4f8bae</span>;
+  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">230</span>, <span class="hljs-number">242</span>, <span class="hljs-number">247</span>, <span class="hljs-number">0.5</span>);
+}
+
+<span class="hljs-selector-class">.nav-item</span><span class="hljs-selector-pseudo">::after</span> {
+  <span class="hljs-attribute">content</span>: <span class="hljs-string">&#x27;&#x27;</span>;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">bottom</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">2px</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#4f8bae</span>;
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.3s</span> <span class="hljs-built_in">cubic-bezier</span>(<span class="hljs-number">0.4</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">1</span>);
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(-<span class="hljs-number">50%</span>);
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">99px</span>;
+}
+
+<span class="hljs-selector-class">.nav-item</span><span class="hljs-selector-pseudo">:hover</span><span class="hljs-selector-pseudo">::after</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">60%</span>;
+}
+
+<span class="hljs-selector-class">.nav-item</span><span class="hljs-selector-class">.active</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#4f8bae</span>;
+  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">230</span>, <span class="hljs-number">242</span>, <span class="hljs-number">247</span>, <span class="hljs-number">0.5</span>);
+}
+
+<span class="hljs-selector-class">.nav-item</span><span class="hljs-selector-class">.active</span><span class="hljs-selector-pseudo">::after</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">60%</span>;
+}
+
+<span class="hljs-comment">/* 开往外链 */</span>
+<span class="hljs-selector-class">.nav-travellings</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#f97316</span> <span class="hljs-meta">!important</span>;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">700</span>;
+}
+<span class="hljs-selector-class">.nav-travellings</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">249</span>, <span class="hljs-number">115</span>, <span class="hljs-number">22</span>, <span class="hljs-number">0.08</span>) <span class="hljs-meta">!important</span>;
+}
+
+<span class="hljs-comment">/* 语言切换按钮 */</span>
+<span class="hljs-selector-class">.nav-right</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">gap</span>: <span class="hljs-number">8px</span>;
+}
+
+<span class="hljs-selector-class">.lang-btn</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">gap</span>: <span class="hljs-number">6px</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">6px</span> <span class="hljs-number">14px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">9999px</span>;
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#fecdd3</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">700</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#8a8fa3</span>;
+  <span class="hljs-attribute">background</span>: white;
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.25s</span>;
+}
+<span class="hljs-selector-class">.lang-btn</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">border-color</span>: <span class="hljs-number">#4f8bae</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#4f8bae</span>;
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-number">4px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">79</span>, <span class="hljs-number">139</span>, <span class="hljs-number">174</span>, <span class="hljs-number">0.15</span>);
+}
+<span class="hljs-selector-class">.lang-btn</span><span class="hljs-selector-pseudo">:active</span> {
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">scale</span>(<span class="hljs-number">0.95</span>);
+}
+
+<span class="hljs-selector-class">.lang-btn</span> <span class="hljs-selector-tag">i</span> {
+  <span class="hljs-attribute">animation</span>: spin <span class="hljs-number">15s</span> linear infinite;
+}
+<span class="hljs-keyword">@keyframes</span> spin {
+  <span class="hljs-selector-tag">from</span> { <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(<span class="hljs-number">0deg</span>); }
+  <span class="hljs-selector-tag">to</span> { <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(<span class="hljs-number">360deg</span>); }
+}
+
+<span class="hljs-comment">/* 移动端菜单按钮 */</span>
+<span class="hljs-selector-class">.mobile-toggle</span> {
+  <span class="hljs-attribute">display</span>: none;
+  <span class="hljs-attribute">flex-direction</span>: column;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">8px</span> <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">border</span>: none;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">background</span>: none;
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.2s</span>;
+}
+<span class="hljs-selector-class">.mobile-toggle</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.04</span>);
+}
+
+<span class="hljs-selector-class">.toggler-icon</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">22px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">2px</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#555</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">4px</span> <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">display</span>: block;
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">2px</span>;
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.3s</span> ease-out;
+}
+
+<span class="hljs-selector-class">.mobile-toggle</span><span class="hljs-selector-class">.active</span> <span class="hljs-selector-class">.toggler-icon</span><span class="hljs-selector-pseudo">:nth-of-type</span>(<span class="hljs-number">1</span>) {
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(<span class="hljs-number">45deg</span>);
+  <span class="hljs-attribute">top</span>: <span class="hljs-number">6px</span>;
+}
+<span class="hljs-selector-class">.mobile-toggle</span><span class="hljs-selector-class">.active</span> <span class="hljs-selector-class">.toggler-icon</span><span class="hljs-selector-pseudo">:nth-of-type</span>(<span class="hljs-number">2</span>) {
+  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
+}
+<span class="hljs-selector-class">.mobile-toggle</span><span class="hljs-selector-class">.active</span> <span class="hljs-selector-class">.toggler-icon</span><span class="hljs-selector-pseudo">:nth-of-type</span>(<span class="hljs-number">3</span>) {
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">rotate</span>(-<span class="hljs-number">45deg</span>);
+  <span class="hljs-attribute">top</span>: -<span class="hljs-number">6px</span>;
+}
+
+<span class="hljs-comment">/* 移动端菜单 */</span>
+<span class="hljs-selector-class">.mobile-menu</span> {
+  <span class="hljs-attribute">display</span>: none;
+  <span class="hljs-attribute">flex-direction</span>: column;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">8px</span> <span class="hljs-number">16px</span> <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0.95</span>);
+  -webkit-backdrop-<span class="hljs-attribute">filter</span>: <span class="hljs-built_in">blur</span>(<span class="hljs-number">16px</span>);
+  backdrop-<span class="hljs-attribute">filter</span>: <span class="hljs-built_in">blur</span>(<span class="hljs-number">16px</span>);
+  <span class="hljs-attribute">border-bottom</span>: <span class="hljs-number">1px</span> solid <span class="hljs-built_in">rgba</span>(<span class="hljs-number">252</span>, <span class="hljs-number">220</span>, <span class="hljs-number">222</span>, <span class="hljs-number">0.4</span>);
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">8px</span> <span class="hljs-number">24px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.08</span>);
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">16px</span> <span class="hljs-number">16px</span>;
+}
+
+<span class="hljs-selector-class">.mobile-link</span> {
+  <span class="hljs-attribute">display</span>: block;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span> <span class="hljs-number">14px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">15px</span>;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">600</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#374151</span>;
+  <span class="hljs-attribute">text-decoration</span>: none;
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.2s</span>;
+}
+<span class="hljs-selector-class">.mobile-link</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">230</span>, <span class="hljs-number">242</span>, <span class="hljs-number">247</span>, <span class="hljs-number">0.5</span>);
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#4f8bae</span>;
+}
+<span class="hljs-selector-class">.mobile-link</span><span class="hljs-selector-class">.mobile-active</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#4f8bae</span>;
+  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">230</span>, <span class="hljs-number">242</span>, <span class="hljs-number">247</span>, <span class="hljs-number">0.5</span>);
+}
+<span class="hljs-selector-class">.mobile-travellings</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#f97316</span> <span class="hljs-meta">!important</span>;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">700</span>;
+}
+
+<span class="hljs-comment">/* 响应式断点 */</span>
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">767px</span>) {
+  <span class="hljs-selector-class">.nav-links</span>, <span class="hljs-selector-class">.nav-right</span> {
+    <span class="hljs-attribute">display</span>: none;
+  }
+  <span class="hljs-selector-class">.mobile-toggle</span>, <span class="hljs-selector-class">.mobile-menu</span> {
+    <span class="hljs-attribute">display</span>: flex;
+  }
+}
+
+<span class="hljs-comment">/* 菜单动画 */</span>
+<span class="hljs-selector-class">.slide-down-enter-active</span>, <span class="hljs-selector-class">.slide-down-leave-active</span> {
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.3s</span> ease;
+}
+<span class="hljs-selector-class">.slide-down-enter-from</span>, <span class="hljs-selector-class">.slide-down-leave-to</span> {
+  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(-<span class="hljs-number">10px</span>);
+}
+</code></pre>
+<hr>
+<h2 id="3-主页组件-homesectionvue">3. 主页组件 (HomeSection.vue)</h2>
+<h3 id="文件位置-2">文件位置</h3>
+<p><code>src/views/HomeSection.vue</code></p>
+<h3 id="功能描述-2">功能描述</h3>
+<ul>
+<li>Hero区域展示</li>
+<li>视差效果</li>
+<li>打字机动画</li>
+<li>浮动装饰形状</li>
+<li>点击爱心特效</li>
+<li>响应式布局</li>
+</ul>
+<h3 id="核心代码结构-2">核心代码结构</h3>
+<h4 id="31-脚本逻辑">3.1 脚本逻辑</h4>
+<pre><code class="language-vue">&lt;script setup&gt;
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+const heroRef = ref(null)
+
+// ===== 视差效果 =====
+const mouseX = ref(0)
+const mouseY = ref(0)
+
+function onMouseMove(e) {
+  const rect = heroRef.value?.getBoundingClientRect()
+  if (!rect) return
+  mouseX.value = (e.clientX - rect.left - rect.width / 2) / rect.width
+  mouseY.value = (e.clientY - rect.top - rect.height / 2) / rect.height
+}
+
+function getTransform(depth) {
+  const x = mouseX.value * depth * -100
+  const y = mouseY.value * depth * -100
+  return `translate3d(${x}px, ${y}px, 0)`
+}
+
+// ===== 打字机效果 =====
+const typedText = ref('')
+const strings = [
+  '你好～我是 艾斯特！✨',
+  '一个努力前行的敲代码小狐猫！🦊🐾',
+  '欢迎来到我的温宿炉火~❄️'
+]
+let stringIdx = 0, charIdx = 0, isDeleting = false, timer = null
+
+function tick() {
+  const current = strings[stringIdx]
+  if (isDeleting) {
+    typedText.value = current.substring(0, --charIdx)
+  } else {
+    typedText.value = current.substring(0, ++charIdx)
+  }
+
+  let delta = 100 - Math.random() * 30
+  if (isDeleting) delta = 40
+  if (!isDeleting &amp;&amp; charIdx === current.length) {
+    delta = 2200
+    isDeleting = true
+  } else if (isDeleting &amp;&amp; charIdx === 0) {
+    isDeleting = false
+    stringIdx = (stringIdx + 1) % strings.length
+    delta = 600
+  }
+  timer = setTimeout(tick, delta)
+}
+
+// ===== 浮动装饰形状 =====
+const shapes = [
+  { src: '/images/shape-2.png', depth: 0.30, style: 'top: -18px; left: 20%;', w: 91, title: '左边桃子自取' },
+  { src: '/images/shape-3.png', depth: 0.40, style: 'top: 0; left: 40%;', w: 173 },
+  { src: '/images/shape-2.png', depth: 0.60, style: 'top: 28px; right: 7.6%; left: auto;', w: 91 },
+  { src: '/images/shape-4.png', depth: 0.15, style: 'top: 44%; left: 13%; transform: translateY(-50%);', w: 100 },
+  { src: '/images/shape-5.png', depth: 0.50, style: 'left: 30px; bottom: 50px; top: auto;', w: 195 },
+  { src: '/images/shape-3.png', depth: 0.40, style: 'left: 90px; bottom: 140px; top: auto;', w: 173 },
+  { src: '/images/shape-6.png', depth: 0.20, style: 'left: 450px; transform: translateX(-50%); bottom: 28px; top: auto;', w: 136, title: '嗷呜~' },
+  { src: '/images/shape-3.png', depth: 0.30, style: 'right: 30px; bottom: 5px; left: auto; top: auto;', w: 173 },
+]
+
+// ===== 点击爱心特效 =====
+const hearts = ref([])
+let heartId = 0
+
+function spawnHeart(e) {
+  const id = heartId++
+  hearts.value.push({ id, x: e.clientX, y: e.clientY })
+  setTimeout(() =&gt; {
+    hearts.value = hearts.value.filter(h =&gt; h.id !== id)
+  }, 1000)
+}
+
+onMounted(() =&gt; {
+  tick()
+  document.addEventListener('click', spawnHeart)
+  window.addEventListener('mousemove', onMouseMove)
+})
+
+onUnmounted(() =&gt; {
+  clearTimeout(timer)
+  document.removeEventListener('click', spawnHeart)
+  window.removeEventListener('mousemove', onMouseMove)
+})
+&lt;/script&gt;
+</code></pre>
+<h4 id="32-模板结构">3.2 模板结构</h4>
+<pre><code class="language-vue">&lt;template&gt;
+  &lt;section id=&quot;home&quot; ref=&quot;heroRef&quot; class=&quot;hero-section&quot; @click=&quot;spawnHeart&quot;&gt;
+    &lt;!-- 背景遮罩 --&gt;
+    &lt;div class=&quot;hero-overlay&quot;&gt;&lt;/div&gt;
+
+    &lt;!-- 浮动装饰形状 (视差效果) --&gt;
+    &lt;div class=&quot;shapes-container&quot;&gt;
+      &lt;div
+        v-for=&quot;(s, i) in shapes&quot;
+        :key=&quot;i&quot;
+        class=&quot;header-shape floating-shape&quot;
+        :style=&quot;s.style + ' transform: ' + getTransform(s.depth) + ';'&quot;
+        :title=&quot;s.title&quot;
+      &gt;
+        &lt;img :src=&quot;s.src&quot; :width=&quot;s.w&quot; draggable=&quot;false&quot; :alt=&quot;'shape-' + i&quot;&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- 主内容 --&gt;
+    &lt;div class=&quot;hero-content&quot;&gt;
+      &lt;div class=&quot;hero-card&quot;&gt;
+        &lt;div class=&quot;hero-badge&quot;&gt;✨ {{ t('home.welcome') }}&lt;/div&gt;
+
+        &lt;div&gt;
+          &lt;h1 class=&quot;hero-title&quot;&gt;
+            &lt;span class=&quot;hero-title-blue&quot;&gt;一隅温宿一炉火&lt;/span&gt;
+            &lt;div class=&quot;hero-subtitle&quot;&gt;
+              &lt;span&gt;{{ t('home.subtitle') }}&lt;/span&gt;
+              &lt;span class=&quot;hero-site-badge&quot;&gt;{{ t('home.siteName') }}&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/h1&gt;
+          &lt;p class=&quot;hero-desc&quot;&gt;{{ t('home.desc') }}&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;!-- 打字机 --&gt;
+        &lt;div class=&quot;typing-box&quot;&gt;
+          &lt;h4 class=&quot;typing-text&quot;&gt;
+            &lt;span class=&quot;typing-icon&quot;&gt;$&lt;/span&gt;
+            &lt;span class=&quot;typing-cursor&quot;&gt;{{ typedText }}&lt;/span&gt;
+          &lt;/h4&gt;
+        &lt;/div&gt;
+
+        &lt;!-- CTA 按钮 --&gt;
+        &lt;div class=&quot;hero-buttons&quot;&gt;
+          &lt;a href=&quot;#rec&quot; class=&quot;btn-primary&quot;&gt;
+            &lt;span&gt;📦&lt;/span&gt; {{ t('home.btnResource') }}
+          &lt;/a&gt;
+          &lt;a href=&quot;https://Eysnter.cn&quot; target=&quot;_blank&quot; class=&quot;btn-secondary&quot;&gt;
+            &lt;span&gt;🪶&lt;/span&gt; {{ t('home.btnBlog') }}
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- 点击爱心特效 --&gt;
+    &lt;div v-for=&quot;h in hearts&quot; :key=&quot;h.id&quot; class=&quot;click-heart&quot; :style=&quot;{ left: h.x + 'px', top: h.y + 'px' }&quot;&gt;
+      ❤️
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/template&gt;
+</code></pre>
+<h4 id="33-样式定义">3.3 样式定义</h4>
+<pre><code class="language-css"><span class="hljs-comment">/* Hero区域 */</span>
+<span class="hljs-selector-class">.hero-section</span> {
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">height</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-number">100vh</span> - <span class="hljs-number">100px</span>);
+  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">85px</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">80px</span> <span class="hljs-number">1rem</span>;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">overflow</span>: hidden;
+  <span class="hljs-attribute">cursor</span>: default;
+  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">&#x27;https://img.eysnter.cn/file/Wallpaper/1780812502559_白洲梓.webp&#x27;</span>) center / cover no-repeat;
+}
+
+<span class="hljs-selector-class">.hero-section</span><span class="hljs-selector-pseudo">::before</span> {
+  <span class="hljs-attribute">content</span>: <span class="hljs-string">&#x27;&#x27;</span>;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">background</span>:
+    <span class="hljs-built_in">radial-gradient</span>(circle at <span class="hljs-number">70%</span> <span class="hljs-number">20%</span>, <span class="hljs-built_in">hsla</span>(<span class="hljs-number">40</span>, <span class="hljs-number">85%</span>, <span class="hljs-number">70%</span>, <span class="hljs-number">0.4</span>) <span class="hljs-number">0%</span>, transparent <span class="hljs-number">35%</span>),
+    <span class="hljs-built_in">radial-gradient</span>(circle at <span class="hljs-number">20%</span> <span class="hljs-number">80%</span>, <span class="hljs-built_in">hsla</span>(<span class="hljs-number">342</span>, <span class="hljs-number">65%</span>, <span class="hljs-number">69%</span>, <span class="hljs-number">0.4</span>) <span class="hljs-number">0%</span>, transparent <span class="hljs-number">35%</span>);
+  <span class="hljs-attribute">z-index</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">pointer-events</span>: none;
+}
+
+<span class="hljs-selector-class">.hero-overlay</span> {
+  <span class="hljs-attribute">position</span>: absolute;
+  inset: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">z-index</span>: <span class="hljs-number">1</span>;
+  <span class="hljs-attribute">pointer-events</span>: none;
+}
+
+<span class="hljs-comment">/* 浮动形状容器 */</span>
+<span class="hljs-selector-class">.shapes-container</span> {
+  <span class="hljs-attribute">position</span>: absolute;
+  inset: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">z-index</span>: <span class="hljs-number">2</span>;
+  <span class="hljs-attribute">pointer-events</span>: none;
+}
+
+<span class="hljs-selector-class">.header-shape</span> {
+  <span class="hljs-attribute">position</span>: absolute <span class="hljs-meta">!important</span>;
+  <span class="hljs-attribute">transition</span>: transform <span class="hljs-number">0.1s</span> ease-out;
+  <span class="hljs-attribute">animation</span>: float-shape <span class="hljs-number">6s</span> ease-in-out infinite alternate;
+  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0.7</span>;
+}
+
+<span class="hljs-selector-class">.header-shape</span><span class="hljs-selector-pseudo">:nth-child</span>(<span class="hljs-number">2</span>n) {
+  <span class="hljs-attribute">animation-duration</span>: <span class="hljs-number">8s</span>;
+  <span class="hljs-attribute">animation-delay</span>: <span class="hljs-number">1.5s</span>;
+}
+<span class="hljs-selector-class">.header-shape</span><span class="hljs-selector-pseudo">:nth-child</span>(<span class="hljs-number">3</span>n) {
+  <span class="hljs-attribute">animation-duration</span>: <span class="hljs-number">10s</span>;
+  <span class="hljs-attribute">animation-delay</span>: <span class="hljs-number">2.5s</span>;
+}
+<span class="hljs-selector-class">.header-shape</span><span class="hljs-selector-pseudo">:nth-child</span>(<span class="hljs-number">5</span>n) {
+  <span class="hljs-attribute">animation-duration</span>: <span class="hljs-number">7s</span>;
+  <span class="hljs-attribute">animation-delay</span>: <span class="hljs-number">0.8s</span>;
+}
+
+<span class="hljs-keyword">@keyframes</span> float-shape {
+  <span class="hljs-number">0%</span> { <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">0px</span>; }
+  <span class="hljs-number">100%</span> { <span class="hljs-attribute">margin-top</span>: -<span class="hljs-number">18px</span>; }
+}
+
+<span class="hljs-comment">/* 主内容区域 */</span>
+<span class="hljs-selector-class">.hero-content</span> {
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">z-index</span>: <span class="hljs-number">3</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">max-width</span>: <span class="hljs-number">56rem</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">1rem</span>;
+  <span class="hljs-attribute">text-align</span>: center;
+}
+
+<span class="hljs-comment">/* 内容卡片 */</span>
+<span class="hljs-selector-class">.hero-card</span> {
+  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0.7</span>);
+  backdrop-<span class="hljs-attribute">filter</span>: <span class="hljs-built_in">blur</span>(<span class="hljs-number">12px</span>);
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">2rem</span> <span class="hljs-number">3rem</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">40px</span>;
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-built_in">rgba</span>(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0.6</span>);
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">25px</span> <span class="hljs-number">50px</span> -<span class="hljs-number">12px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.1</span>);
+  <span class="hljs-attribute">max-width</span>: <span class="hljs-number">42rem</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">flex-direction</span>: column;
+  <span class="hljs-attribute">gap</span>: <span class="hljs-number">1.5rem</span>;
+  <span class="hljs-attribute">transition</span>: transform <span class="hljs-number">0.5s</span> ease-out;
+}
+<span class="hljs-selector-class">.hero-card</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">scale</span>(<span class="hljs-number">1.01</span>);
+}
+
+<span class="hljs-comment">/* 徽章 */</span>
+<span class="hljs-selector-class">.hero-badge</span> {
+  <span class="hljs-attribute">display</span>: inline-block;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">6px</span> <span class="hljs-number">16px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">9999px</span>;
+  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">252</span>, <span class="hljs-number">220</span>, <span class="hljs-number">222</span>, <span class="hljs-number">0.8</span>);
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#ec4899</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">700</span>;
+  <span class="hljs-attribute">text-transform</span>: uppercase;
+  <span class="hljs-attribute">letter-spacing</span>: <span class="hljs-number">0.05em</span>;
+  <span class="hljs-attribute">animation</span>: pulse-badge <span class="hljs-number">2s</span> infinite;
+  <span class="hljs-attribute">align-self</span>: center;
+}
+
+<span class="hljs-keyword">@keyframes</span> pulse-badge {
+  <span class="hljs-number">0%</span>, <span class="hljs-number">100%</span> { <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>; }
+  <span class="hljs-number">50%</span> { <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0.7</span>; }
+}
+
+<span class="hljs-comment">/* 标题 */</span>
+<span class="hljs-selector-class">.hero-title</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">2.5rem</span>;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">900</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#111827</span>;
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.2</span>;
+}
+
+<span class="hljs-selector-class">.hero-title-blue</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#4f8bae</span>;
+}
+
+<span class="hljs-selector-class">.hero-subtitle</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.25rem</span>;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">700</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#6b7280</span>;
+  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">8px</span>;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">gap</span>: <span class="hljs-number">8px</span>;
+}
+
+<span class="hljs-selector-class">.hero-site-badge</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">background</span>: <span class="hljs-number">#92cdd6</span>;
+  <span class="hljs-attribute">color</span>: white;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">4px</span> <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">9999px</span>;
+  <span class="hljs-attribute">text-transform</span>: uppercase;
+  <span class="hljs-attribute">letter-spacing</span>: <span class="hljs-number">0.1em</span>;
+  <span class="hljs-attribute">font-family</span>: monospace;
+}
+
+<span class="hljs-selector-class">.hero-desc</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">13px</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#9ca3af</span>;
+  <span class="hljs-attribute">font-style</span>: italic;
+  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">4px</span>;
+}
+
+<span class="hljs-comment">/* 打字机区域 */</span>
+<span class="hljs-selector-class">.typing-box</span> {
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">16px</span>;
+  <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">0.5</span>);
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-built_in">rgba</span>(<span class="hljs-number">252</span>, <span class="hljs-number">220</span>, <span class="hljs-number">222</span>, <span class="hljs-number">0.2</span>);
+  <span class="hljs-attribute">box-shadow</span>: inset <span class="hljs-number">0</span> <span class="hljs-number">2px</span> <span class="hljs-number">4px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.06</span>);
+  <span class="hljs-attribute">min-height</span>: <span class="hljs-number">72px</span>;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">justify-content</span>: center;
+}
+
+<span class="hljs-selector-class">.typing-text</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#4b5563</span>;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">700</span>;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">gap</span>: <span class="hljs-number">4px</span>;
+}
+
+<span class="hljs-selector-class">.typing-icon</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#4f8bae</span>;
+  <span class="hljs-attribute">font-family</span>: monospace;
+}
+
+<span class="hljs-selector-class">.typing-cursor</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#4f8bae</span>;
+  <span class="hljs-attribute">border-right</span>: <span class="hljs-number">2px</span> solid <span class="hljs-number">#4f8bae</span>;
+  <span class="hljs-attribute">padding-right</span>: <span class="hljs-number">4px</span>;
+  <span class="hljs-attribute">animation</span>: blink <span class="hljs-number">1s</span> step-end infinite;
+}
+
+<span class="hljs-keyword">@keyframes</span> blink {
+  <span class="hljs-number">50%</span> { <span class="hljs-attribute">border-color</span>: transparent; }
+}
+
+<span class="hljs-comment">/* CTA按钮 */</span>
+<span class="hljs-selector-class">.hero-buttons</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">flex-wrap</span>: wrap;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">gap</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">padding-top</span>: <span class="hljs-number">8px</span>;
+}
+
+<span class="hljs-selector-class">.btn-primary</span> {
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">14px</span> <span class="hljs-number">24px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">9999px</span>;
+  <span class="hljs-attribute">background</span>: <span class="hljs-number">#4f8bae</span>;
+  <span class="hljs-attribute">color</span>: white;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">700</span>;
+  <span class="hljs-attribute">text-decoration</span>: none;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">gap</span>: <span class="hljs-number">8px</span>;
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">4px</span> <span class="hljs-number">6px</span> -<span class="hljs-number">1px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.1</span>);
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.3s</span>;
+}
+<span class="hljs-selector-class">.btn-primary</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">background</span>: <span class="hljs-number">#396c8a</span>;
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">10px</span> <span class="hljs-number">15px</span> -<span class="hljs-number">3px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.1</span>);
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(-<span class="hljs-number">2px</span>);
+}
+
+<span class="hljs-selector-class">.btn-secondary</span> {
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">14px</span> <span class="hljs-number">24px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">9999px</span>;
+  <span class="hljs-attribute">background</span>: white;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#374151</span>;
+  <span class="hljs-attribute">font-weight</span>: <span class="hljs-number">700</span>;
+  <span class="hljs-attribute">text-decoration</span>: none;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">gap</span>: <span class="hljs-number">8px</span>;
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#e2e8f0</span>;
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-number">2px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.05</span>);
+  <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.3s</span>;
+}
+<span class="hljs-selector-class">.btn-secondary</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">background</span>: <span class="hljs-number">#f8fafc</span>;
+  <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">4px</span> <span class="hljs-number">6px</span> -<span class="hljs-number">1px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.1</span>);
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(-<span class="hljs-number">2px</span>);
+}
+
+<span class="hljs-comment">/* 点击爱心特效 */</span>
+<span class="hljs-selector-class">.click-heart</span> {
+  <span class="hljs-attribute">position</span>: fixed;
+  <span class="hljs-attribute">z-index</span>: <span class="hljs-number">9999</span>;
+  <span class="hljs-attribute">pointer-events</span>: none;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">animation</span>: heart-fly <span class="hljs-number">1s</span> ease-out forwards;
+}
+
+<span class="hljs-keyword">@keyframes</span> heart-fly {
+  <span class="hljs-number">0%</span> { <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>; <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translate</span>(-<span class="hljs-number">50%</span>, <span class="hljs-number">0</span>) <span class="hljs-built_in">scale</span>(<span class="hljs-number">1</span>); }
+  <span class="hljs-number">100%</span> { <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>; <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translate</span>(-<span class="hljs-number">50%</span>, -<span class="hljs-number">80px</span>) <span class="hljs-built_in">scale</span>(<span class="hljs-number">1.5</span>); }
+}
+
+<span class="hljs-comment">/* 响应式 */</span>
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">767px</span>) {
+  <span class="hljs-selector-class">.hero-title</span> { <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.75rem</span>; }
+  <span class="hljs-selector-class">.hero-subtitle</span> { <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1rem</span>; }
+  <span class="hljs-selector-class">.hero-card</span> { <span class="hljs-attribute">padding</span>: <span class="hljs-number">1.5rem</span>; <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">24px</span>; }
+  <span class="hljs-selector-class">.header-shape</span> <span class="hljs-selector-tag">img</span> { <span class="hljs-attribute">width</span>: <span class="hljs-number">40px</span> <span class="hljs-meta">!important</span>; }
+  <span class="hljs-selector-class">.hero-buttons</span> { <span class="hljs-attribute">flex-direction</span>: column; }
+}
+</code></pre>
+<hr>
+<h2 id="4-路由配置-routerindexjs">4. 路由配置 (router/index.js)</h2>
+<h3 id="文件位置-3">文件位置</h3>
+<p><code>src/router/index.js</code></p>
+<h3 id="功能描述-3">功能描述</h3>
+<ul>
+<li>定义页面路由</li>
+<li>配置滚动行为</li>
+<li>页面标题设置</li>
+</ul>
+<h3 id="核心代码">核心代码</h3>
+<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { createRouter, createWebHistory } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span>
+
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">HomeSection</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../views/HomeSection.vue&#x27;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">AboutSection</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../views/AboutSection.vue&#x27;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">TimelineSection</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../views/TimelineSection.vue&#x27;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">AskSection</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../views/AskSection.vue&#x27;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">RecSection</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../views/RecSection.vue&#x27;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">BlogSection</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../views/BlogSection.vue&#x27;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">ApiSection</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../views/ApiSection.vue&#x27;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">ContactSection</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../views/ContactSection.vue&#x27;</span>
+
+<span class="hljs-keyword">const</span> routes = [
+  { <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;home&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">HomeSection</span>, <span class="hljs-attr">meta</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;主页&#x27;</span> } },
+  { <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/about&#x27;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;about&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">AboutSection</span>, <span class="hljs-attr">meta</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;简介&#x27;</span> } },
+  { <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/journal&#x27;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;journal&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">TimelineSection</span>, <span class="hljs-attr">meta</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;小确幸手账&#x27;</span> } },
+  { <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/ask&#x27;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;ask&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">AskSection</span>, <span class="hljs-attr">meta</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;棉花糖&#x27;</span> } },
+  { <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/rec&#x27;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;rec&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">RecSection</span>, <span class="hljs-attr">meta</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;资源&#x27;</span> } },
+  { <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/blog&#x27;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;blog&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">BlogSection</span>, <span class="hljs-attr">meta</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;工作台&#x27;</span> } },
+  { <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/api&#x27;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;api&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">ApiSection</span>, <span class="hljs-attr">meta</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;API&#x27;</span> } },
+  { <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/contact&#x27;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;contact&#x27;</span>, <span class="hljs-attr">component</span>: <span class="hljs-title class_">ContactSection</span>, <span class="hljs-attr">meta</span>: { <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;关于&#x27;</span> } },
+  { <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/:pathMatch(.*)*&#x27;</span>, <span class="hljs-attr">redirect</span>: <span class="hljs-string">&#x27;/&#x27;</span> },
+]
+
+<span class="hljs-keyword">const</span> router = <span class="hljs-title function_">createRouter</span>({
+  <span class="hljs-attr">history</span>: <span class="hljs-title function_">createWebHistory</span>(),
+  routes,
+  <span class="hljs-title function_">scrollBehavior</span>(<span class="hljs-params">to</span>) {
+    <span class="hljs-keyword">if</span> (to.<span class="hljs-property">hash</span>) {
+      <span class="hljs-keyword">return</span> { <span class="hljs-attr">el</span>: to.<span class="hljs-property">hash</span>, <span class="hljs-attr">behavior</span>: <span class="hljs-string">&#x27;smooth&#x27;</span>, <span class="hljs-attr">top</span>: <span class="hljs-number">80</span> }
+    }
+    <span class="hljs-keyword">return</span> { <span class="hljs-attr">top</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">behavior</span>: <span class="hljs-string">&#x27;smooth&#x27;</span> }
+  },
+})
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> router
+</code></pre>
+<hr>
+<h2 id="5-国际化配置">5. 国际化配置</h2>
+<h3 id="51-中文翻译-i18nzhjs">5.1 中文翻译 (i18n/zh.js)</h3>
+<pre><code class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-attr">nav</span>: {
+    <span class="hljs-attr">home</span>: <span class="hljs-string">&#x27;首页&#x27;</span>,
+    <span class="hljs-attr">about</span>: <span class="hljs-string">&#x27;关于&#x27;</span>,
+    <span class="hljs-attr">journal</span>: <span class="hljs-string">&#x27;日志&#x27;</span>,
+    <span class="hljs-attr">ask</span>: <span class="hljs-string">&#x27;问答&#x27;</span>,
+    <span class="hljs-attr">rec</span>: <span class="hljs-string">&#x27;推荐&#x27;</span>,
+    <span class="hljs-attr">blog</span>: <span class="hljs-string">&#x27;博客&#x27;</span>,
+    <span class="hljs-attr">api</span>: <span class="hljs-string">&#x27;API&#x27;</span>,
+    <span class="hljs-attr">contact</span>: <span class="hljs-string">&#x27;联系&#x27;</span>,
+    <span class="hljs-attr">travellings</span>: <span class="hljs-string">&#x27;开往&#x27;</span>
+  },
+  <span class="hljs-attr">home</span>: {
+    <span class="hljs-attr">welcome</span>: <span class="hljs-string">&#x27;欢迎光临&#x27;</span>,
+    <span class="hljs-attr">subtitle</span>: <span class="hljs-string">&#x27;一个温暖的小站&#x27;</span>,
+    <span class="hljs-attr">siteName</span>: <span class="hljs-string">&#x27;Eysnter.cn&#x27;</span>,
+    <span class="hljs-attr">desc</span>: <span class="hljs-string">&#x27;在这里记录生活、分享资源、探索技术&#x27;</span>,
+    <span class="hljs-attr">btnResource</span>: <span class="hljs-string">&#x27;📦 资源推荐&#x27;</span>,
+    <span class="hljs-attr">btnBlog</span>: <span class="hljs-string">&#x27;🪶 访问博客&#x27;</span>
+  }
+}
+</code></pre>
+<h3 id="52-日语翻译-i18njajs">5.2 日语翻译 (i18n/ja.js)</h3>
+<pre><code class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-attr">nav</span>: {
+    <span class="hljs-attr">home</span>: <span class="hljs-string">&#x27;ホーム&#x27;</span>,
+    <span class="hljs-attr">about</span>: <span class="hljs-string">&#x27;紹介&#x27;</span>,
+    <span class="hljs-attr">journal</span>: <span class="hljs-string">&#x27;日記&#x27;</span>,
+    <span class="hljs-attr">ask</span>: <span class="hljs-string">&#x27;質問&#x27;</span>,
+    <span class="hljs-attr">rec</span>: <span class="hljs-string">&#x27;おすすめ&#x27;</span>,
+    <span class="hljs-attr">blog</span>: <span class="hljs-string">&#x27;ブログ&#x27;</span>,
+    <span class="hljs-attr">api</span>: <span class="hljs-string">&#x27;API&#x27;</span>,
+    <span class="hljs-attr">contact</span>: <span class="hljs-string">&#x27;連絡&#x27;</span>,
+    <span class="hljs-attr">travellings</span>: <span class="hljs-string">&#x27;開往&#x27;</span>
+  },
+  <span class="hljs-attr">home</span>: {
+    <span class="hljs-attr">welcome</span>: <span class="hljs-string">&#x27;ようこそ&#x27;</span>,
+    <span class="hljs-attr">subtitle</span>: <span class="hljs-string">&#x27;温かな小さな駅&#x27;</span>,
+    <span class="hljs-attr">siteName</span>: <span class="hljs-string">&#x27;Eysnter.cn&#x27;</span>,
+    <span class="hljs-attr">desc</span>: <span class="hljs-string">&#x27;ここで生活を記録し、リソースを共有し、技術を探求します&#x27;</span>,
+    <span class="hljs-attr">btnResource</span>: <span class="hljs-string">&#x27;📦 リソースおすすめ&#x27;</span>,
+    <span class="hljs-attr">btnBlog</span>: <span class="hljs-string">&#x27;🪶 ブログを見る&#x27;</span>
+  }
+}
+</code></pre>
+<hr>
+<h2 id="6-全局样式-stylesmaincss">6. 全局样式 (styles/main.css)</h2>
+<h3 id="文件位置-4">文件位置</h3>
+<p><code>src/styles/main.css</code></p>
+<h3 id="功能描述-4">功能描述</h3>
+<ul>
+<li>定义CSS变量</li>
+<li>字体声明</li>
+<li>基础重置样式</li>
+</ul>
+<h3 id="核心代码-1">核心代码</h3>
+<pre><code class="language-css"><span class="hljs-comment">/* 全局字体与 CSS 变量 */</span>
+<span class="hljs-selector-pseudo">:root</span> {
+  <span class="hljs-attr">--color-primary</span>: <span class="hljs-number">#4f8bae</span>;
+  <span class="hljs-attr">--color-primary-light</span>: <span class="hljs-number">#e6f2f7</span>;
+  <span class="hljs-attr">--color-secondary</span>: <span class="hljs-number">#ffb5b5</span>;
+  <span class="hljs-attr">--color-accent</span>: <span class="hljs-number">#92cdd6</span>;
+  <span class="hljs-attr">--color-pink-light</span>: <span class="hljs-number">#fcdcde</span>;
+  <span class="hljs-attr">--font-xiaolai</span>: <span class="hljs-string">&#x27;XiaolaiSC&#x27;</span>, <span class="hljs-string">&#x27;PingFang SC&#x27;</span>, <span class="hljs-string">&#x27;Microsoft YaHei&#x27;</span>, sans-serif;
+}
+
+<span class="hljs-keyword">@font-face</span> {
+  <span class="hljs-attribute">font-family</span>: <span class="hljs-string">&#x27;XiaolaiSC&#x27;</span>;
+  <span class="hljs-attribute">src</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">&#x27;/fonts/xiaolaisc-subset.woff2&#x27;</span>) <span class="hljs-built_in">format</span>(<span class="hljs-string">&#x27;woff2&#x27;</span>);
+  <span class="hljs-attribute">font-display</span>: swap;
+}
+</code></pre>
+<hr>
+<h2 id="7-依赖的素材文件">7. 依赖的素材文件</h2>
+<h3 id="71-图片素材">7.1 图片素材</h3>
+<table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/images/shape-2.png</code></td>
+<td>浮动装饰形状</td>
+</tr>
+<tr>
+<td><code>/images/shape-3.png</code></td>
+<td>浮动装饰形状</td>
+</tr>
+<tr>
+<td><code>/images/shape-4.png</code></td>
+<td>浮动装饰形状</td>
+</tr>
+<tr>
+<td><code>/images/shape-5.png</code></td>
+<td>浮动装饰形状</td>
+</tr>
+<tr>
+<td><code>/images/shape-6.png</code></td>
+<td>浮动装饰形状</td>
+</tr>
+<tr>
+<td><code>/images/favicon.ico</code></td>
+<td>网站图标</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72-字体素材">7.2 字体素材</h3>
+<table>
+<thead>
+<tr>
+<th>文件路径</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/fonts/xiaolaisc-subset.woff2</code></td>
+<td>XiaolaiSC字体</td>
+</tr>
+</tbody>
+</table>
+<h3 id="73-外部资源">7.3 外部资源</h3>
+<table>
+<thead>
+<tr>
+<th>资源</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FontAwesome 6.4.0</td>
+<td>图标库</td>
+</tr>
+<tr>
+<td>背景图片CDN</td>
+<td>Hero区域背景</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="8-组件依赖关系">8. 组件依赖关系</h2>
+<pre><code>App.vue (根组件)
+├── Navbar.vue (导航栏)
+│   ├── useI18n (国际化)
+│   ├── useRoute (路由)
+│   ├── useRouter (路由)
+│   └── useLanguageStore (语言状态)
+├── HomeSection.vue (主页)
+│   ├── useI18n (国际化)
+│   └── 视差效果、打字机、爱心特效
+├── FooterSection.vue (页脚)
+└── 背景粒子画布 (内联)
+</code></pre>
+<hr>
+<h2 id="9-关键特性总结">9. 关键特性总结</h2>
+<h3 id="91-导航栏特性">9.1 导航栏特性</h3>
+<ul>
+<li>✅ 固定顶部定位</li>
+<li>✅ 毛玻璃效果（backdrop-filter）</li>
+<li>✅ 滚动时背景变化</li>
+<li>✅ 响应式设计（桌面端/移动端）</li>
+<li>✅ 移动端汉堡菜单</li>
+<li>✅ 语言切换功能</li>
+<li>✅ 活动状态高亮</li>
+<li>✅ 下划线动画效果</li>
+<li>✅ Logo悬浮旋转效果</li>
+</ul>
+<h3 id="92-主页特性">9.2 主页特性</h3>
+<ul>
+<li>✅ Hero区域全屏展示</li>
+<li>✅ 视差效果（鼠标跟随）</li>
+<li>✅ 打字机动画</li>
+<li>✅ 浮动装饰形状</li>
+<li>✅ 点击爱心特效</li>
+<li>✅ 毛玻璃卡片</li>
+<li>✅ 响应式布局</li>
+<li>✅ 背景图片</li>
+<li>✅ 渐变遮罩</li>
+</ul>
+<h3 id="93-背景粒子特性">9.3 背景粒子特性</h3>
+<ul>
+<li>✅ 樱雪粒子效果</li>
+<li>✅ 55个粒子</li>
+<li>✅ 鼠标交互（排斥效果）</li>
+<li>✅ 自适应窗口大小</li>
+<li>✅ 粒子循环动画</li>
+<li>✅ 固定定位（不随页面滚动）</li>
+</ul>
+<hr>
+<h2 id="10-使用说明">10. 使用说明</h2>
+<h3 id="101-查看组件示例">10.1 查看组件示例</h3>
+<p>打开 <code>页面/组件.html</code> 文件，可以在浏览器中查看导航栏和背景粒子效果的完整示例。</p>
+<h3 id="102-开发环境">10.2 开发环境</h3>
+<pre><code class="language-bash"><span class="hljs-comment"># 安装依赖</span>
+npm install
+
+<span class="hljs-comment"># 启动开发服务器</span>
+npm run dev
+
+<span class="hljs-comment"># 构建生产版本</span>
+npm run build
+</code></pre>
+<h3 id="103-自定义配置">10.3 自定义配置</h3>
+<ul>
+<li>修改 <code>src/i18n/zh.js</code> 和 <code>src/i18n/ja.js</code> 来更改翻译内容</li>
+<li>修改 <code>src/views/HomeSection.vue</code> 中的 <code>shapes</code> 数组来更改浮动形状</li>
+<li>修改 <code>src/App.vue</code> 中的 <code>MAX_PARTICLES</code> 和 <code>PARTICLE_COLOR</code> 来调整粒子效果</li>
+<li>修改 <code>src/components/Navbar.vue</code> 中的 <code>navLinks</code> 数组来更改导航链接</li>
+</ul>
+<hr>
+<h2 id="11-注意事项">11. 注意事项</h2>
+<ol>
+<li><strong>字体加载</strong>: XiaolaiSC 字体需要放在 <code>/fonts/</code> 目录下</li>
+<li><strong>图片路径</strong>: 所有图片路径相对于 <code>/images/</code> 目录</li>
+<li><strong>背景图片</strong>: Hero区域使用CDN链接，需要网络连接</li>
+<li><strong>浏览器兼容</strong>: backdrop-filter 需要现代浏览器支持</li>
+<li><strong>移动端</strong>: 响应式断点为 767px</li>
+</ol>
+<hr>
+<p><em>文档生成时间: 2026年6月8日</em>
+<em>项目版本: shed-vue</em></p>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

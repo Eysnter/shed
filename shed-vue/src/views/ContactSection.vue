@@ -1,9 +1,26 @@
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRuntime } from '../composables/useRuntime'
 
 const { t } = useI18n()
-const { days, hours, minutes, seconds } = useRuntime()
+
+// ===== 运行时间计算（内联） =====
+const days = ref(0)
+const hours = ref(0)
+const minutes = ref(0)
+const seconds = ref(0)
+let runtimeTimer = null
+
+function updateRuntime() {
+  const diff = Date.now() - new Date('2025-02-02T09:32:00').getTime()
+  days.value = Math.floor(diff / (1000 * 60 * 60 * 24))
+  hours.value = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+  minutes.value = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+  seconds.value = Math.floor((diff % (1000 * 60)) / 1000)
+}
+
+onMounted(() => { updateRuntime(); runtimeTimer = setInterval(updateRuntime, 1000) })
+onUnmounted(() => { if (runtimeTimer) clearInterval(runtimeTimer) })
 </script>
 
 <template>

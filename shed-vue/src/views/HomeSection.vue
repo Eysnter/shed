@@ -1,11 +1,24 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useParallax } from '../composables/useParallax'
 
 const { t } = useI18n()
 const heroRef = ref(null)
-const { getTransform } = useParallax(heroRef)
+
+// ===== 视差效果（内联） =====
+const mouseX = ref(0)
+const mouseY = ref(0)
+function onMouseMove(e) {
+  const rect = heroRef.value?.getBoundingClientRect()
+  if (!rect) return
+  mouseX.value = (e.clientX - rect.left - rect.width / 2) / rect.width
+  mouseY.value = (e.clientY - rect.top - rect.height / 2) / rect.height
+}
+function getTransform(depth) {
+  const x = mouseX.value * depth * -100
+  const y = mouseY.value * depth * -100
+  return `translate3d(${x}px, ${y}px, 0)`
+}
 
 // 打字机
 const typedText = ref('')
@@ -46,8 +59,8 @@ function spawnHeart(e) {
   setTimeout(() => { hearts.value = hearts.value.filter(h => h.id !== id) }, 1000)
 }
 
-onMounted(() => { tick(); document.addEventListener('click', spawnHeart) })
-onUnmounted(() => { clearTimeout(timer); document.removeEventListener('click', spawnHeart) })
+onMounted(() => { tick(); document.addEventListener('click', spawnHeart); window.addEventListener('mousemove', onMouseMove) })
+onUnmounted(() => { clearTimeout(timer); document.removeEventListener('click', spawnHeart); window.removeEventListener('mousemove', onMouseMove) })
 </script>
 
 <template>

@@ -10,7 +10,7 @@ function randomFriend() {
 <template>
   <footer id="footer" style="background: #10172a; color: #94a3b8; padding: 4rem 0;">
     <div style="max-width: 80rem; margin: 0 auto; padding: 0 1rem;">
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem;">
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem;" class="footer-grid">
         <!-- Logo -->
         <div style="text-align: left;">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 1rem;">
@@ -31,10 +31,10 @@ function randomFriend() {
         <div style="text-align: left;">
           <h5 style="font-weight: 800; color: white; font-size: 14px; margin-bottom: 1rem;">{{ t('footer.navTitle') }}</h5>
           <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
-            <li><a href="#ask" style="color: #94a3b8; text-decoration: none;">{{ t('footer.nav.ask') }}</a></li>
-            <li><a href="#rec" style="color: #94a3b8; text-decoration: none;">{{ t('footer.nav.rec') }}</a></li>
-            <li><a href="#blog" style="color: #94a3b8; text-decoration: none;">{{ t('footer.nav.blog') }}</a></li>
-            <li><a href="#api" style="color: #94a3b8; text-decoration: none;">{{ t('footer.nav.api') }}</a></li>
+            <li><router-link to="/ask" style="color: #94a3b8; text-decoration: none;">{{ t('footer.nav.ask') }}</router-link></li>
+            <li><router-link to="/rec" style="color: #94a3b8; text-decoration: none;">{{ t('footer.nav.rec') }}</router-link></li>
+            <li><router-link to="/blog" style="color: #94a3b8; text-decoration: none;">{{ t('footer.nav.blog') }}</router-link></li>
+            <li><router-link to="/api" style="color: #94a3b8; text-decoration: none;">{{ t('footer.nav.api') }}</router-link></li>
           </ul>
         </div>
 
@@ -43,7 +43,7 @@ function randomFriend() {
           <h5 style="font-weight: 800; color: white; font-size: 14px; margin-bottom: 1rem;">{{ t('footer.friendsTitle') }}</h5>
           <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
             <li><button @click="randomFriend" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 12px; padding: 0;">✨ {{ t('footer.friends.random') }}</button></li>
-            <li><a href="#ask" style="color: #94a3b8; text-decoration: none;">{{ t('footer.friends.more') }}</a></li>
+            <li><router-link to="/ask" style="color: #94a3b8; text-decoration: none;">{{ t('footer.friends.more') }}</router-link></li>
           </ul>
         </div>
 
@@ -61,3 +61,11 @@ function randomFriend() {
     </div>
   </footer>
 </template>
+
+<style scoped>
+@media (max-width: 767px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+</style>

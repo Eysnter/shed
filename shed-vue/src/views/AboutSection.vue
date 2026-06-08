@@ -21,7 +21,7 @@ watch(() => langStore.current, (val) => {
 const isBoosted = ref(false)
 const skills = ref([
   { name: "Java学习", nameJa: "Java開発", target: 85, gradientClass: "from-[#4f8bae]/40 to-[#4f8bae]" },
-  { name: "Python / 标书查重系统", nameJa: "Python / システム開発", target: 80, gradientClass: "from-[#92cdd6]/40 to-pink-400" },
+  { name: "Python / 标书查重系统", nameJa: "Python / システム開発", target: 50, gradientClass: "from-[#92cdd6]/40 to-pink-400" },
   { name: "JavaWeb开发", nameJa: "JavaWebスタック", target: 75, gradientClass: "from-emerald-300/40 to-teal-400" }
 ])
 
@@ -457,7 +457,7 @@ onUnmounted(() => {
   </section>
 </template>
 
-<style scoped>
+<style>
 .about-page {
   padding-top: 6rem;
 }
